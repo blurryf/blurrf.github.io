@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>“spring整合redis”</title>
+    <link href="/2021/11/16/47151.html/"/>
+    <url>/2021/11/16/47151.html/</url>
+    
+    <content type="html"><![CDATA[<h1 id="spring整合redis"><a href="#spring整合redis" class="headerlink" title="spring整合redis"></a>spring整合redis</h1><hr><h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><p>1.搭建SpringBoot工程</p><p>2.引入redis起步依赖</p><p>3.配置redis相关属性</p><p>4.注入RedisTemplate模板</p><p>5.编写测试方法，测试</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>我的第一篇博客</title>
     <link href="/2021/11/15/63785.html/"/>
     <url>/2021/11/15/63785.html/</url>
