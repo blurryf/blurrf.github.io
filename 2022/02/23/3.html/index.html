@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="xrt">
+  <meta name="keywords" content="">
+  <meta name="description" content="Java异常机制在理想的情况下，我们的程序会按照我们的思路去运行，按理说是不会出现问题的，但是，代码实际编写后并不一定是完美的，可能会有我们没有考虑到的情况，如果这些情况能够正常得到一个错误的结果还好，但是如果直接导致程序运行出现问题了呢？ 1234567891011public static void main(String[] args) &amp;#123;    test(1, 0);   &#x2F;&#x2F;当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常机制">
+<meta property="og:url" content="http://blurryf.github.io/2022/02/23/3.html/index.html">
+<meta property="og:site_name" content="XRTing&#39;s Blog">
+<meta property="og:description" content="Java异常机制在理想的情况下，我们的程序会按照我们的思路去运行，按理说是不会出现问题的，但是，代码实际编写后并不一定是完美的，可能会有我们没有考虑到的情况，如果这些情况能够正常得到一个错误的结果还好，但是如果直接导致程序运行出现问题了呢？ 1234567891011public static void main(String[] args) &amp;#123;    test(1, 0);   &#x2F;&#x2F;当">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-23T08:53:48.423Z">
+<meta property="article:modified_time" content="2022-02-23T08:54:34.120Z">
+<meta property="article:author" content="xrt">
+<meta property="article:tag" content="JavaSE">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Java异常机制 - XRTing&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blurryf.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XRTing</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java异常机制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-23 16:53" pubdate>
+        2022年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java异常机制</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Java异常机制"><a href="#Java异常机制" class="headerlink" title="Java异常机制"></a>Java异常机制</h1><p>在理想的情况下，我们的程序会按照我们的思路去运行，按理说是不会出现问题的，但是，代码实际编写后并不一定是完美的，可能会有我们没有考虑到的情况，如果这些情况能够正常得到一个错误的结果还好，但是如果直接导致程序运行出现问题了呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);   <span class="hljs-comment">//当b为0的时候，还能正常运行吗？</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> a/b;   <span class="hljs-comment">//没有任何的判断而是直接做计算</span><br>&#125;<br><br>Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.ArithmeticException: / by zero<br>	at com.test.Application.test(Application.java:<span class="hljs-number">9</span>)<br>	at com.test.Application.main(Application.java:<span class="hljs-number"><code class="language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);   <span class="hljs-comment">//当b为0的时候，还能正常运行吗？</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> a/b;   <span class="hljs-comment">//没有任何的判断而是直接做计算</span><br>&#125;<br><br>Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.ArithmeticException: / by zero<br>	at com.test.Application.test(Application.java:<span class="hljs-number">9</span>)<br>	at com.test.Application.main(Application.java:<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+
+<p>当程序运行出现我们没有考虑到的情况时，就有可能出现异常或是错误！</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>我们在之前其实已经接触过一些异常了，比如数组越界异常，空指针异常，算术异常等，他们其实都是异常类型，我们的每一个异常也是一个类，他们都继承自<code>Exception</code>类！异常类型本质依然类的对象，但是异常类型支持在程序运行出现问题时抛出（也就是上面出现的红色报错）也可以提前声明，告知使用者需要处理可能会出现的异常！</p>
+<h3 id="运行时异常"><a href="#运行时异常" class="headerlink" title="运行时异常"></a>运行时异常</h3><p>异常的第一种类型是运行时异常，如上述的列子，在编译阶段无法感知代码是否会出现问题，只有在运行的时候才知道会不会出错（正常情况下是不会出错的），这样的异常称为运行时异常。所有的运行时异常都继承自<code>RuntimeException</code>。</p>
+<h3 id="编译时异常"><a href="#编译时异常" class="headerlink" title="编译时异常"></a>编译时异常</h3><p>异常的另一种类型是编译时异常，编译时异常是明确会出现的异常，在编译阶段就需要进行处理的异常（捕获异常）如果不进行处理，将无法通过编译！默认继承自<code>Exception</code>类的异常都是编译时异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs java">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;my.txt&quot;</span>);<br>file.createNewFile();   <span class="hljs-comment"><code class="language-hljs java">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;my.txt&quot;</span>);<br>file.createNewFile();   <span class="hljs-comment">//要调用此方法，首先需要处理异常</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><p>错误比异常更严重，异常就是不同寻常，但不一定会导致致命的问题，而错误是致命问题，一般出现错误可能JVM就无法继续正常运行了，比如<code>OutOfMemoryError</code>就是内存溢出错误（内存占用已经超出限制，无法继续申请内存了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[Integer.MAX_VALUE];   <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[Integer.MAX_VALUE];   <span class="hljs-comment">//能创建如此之大的数组吗？</span><br></code></pre></td></tr></table></figure>
+
+<p>运行后得到以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs java">Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.OutOfMemoryError: Requested array size exceeds VM limit<br>	at com.test.Main.main(Main.java:<span class="hljs-number"><code class="language-hljs java">Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.OutOfMemoryError: Requested array size exceeds VM limit<br>	at com.test.Main.main(Main.java:<span class="hljs-number">14</span>)<br></code></pre></td></tr></table></figure>
+
+<p>错误都继承自<code>Error</code>类，一般情况下，程序中只能处理异常，错误是很难进行处理的，<code>Error</code>和<code>Execption</code>都继承自<code>Throwable</code>类。当程序中出现错误或异常时又没有进行处理时，程序（当前线程）将终止运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[Integer.MAX_VALUE];<br>System.out.println(<span class="hljs-string">&quot;lbwnb&quot;</span>);  <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[Integer.MAX_VALUE];<br>System.out.println(<span class="hljs-string">&quot;lbwnb&quot;</span>);  <span class="hljs-comment">//还能正常打印吗？</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="异常的处理"><a href="#异常的处理" class="headerlink" title="异常的处理"></a>异常的处理</h2><p>当程序没有按照我们想要的样子运行而出现异常时（默认会交给JVM来处理，JVM发现任何异常都会立即终止程序运行，并在控制台打印栈追踪信息），我们希望能够自己处理出现的问题，让程序继续运行下去，就需要对异常进行捕获，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];<br>arr[<span class="hljs-number">5</span>] = <span class="hljs-number">1</span>;  <span class="hljs-comment">//我们需要处理这种情况，保证后面的代码正常运行！</span><br>System.out.println(<span class="hljs-string"><code class="language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];<br>arr[<span class="hljs-number">5</span>] = <span class="hljs-number">1</span>;  <span class="hljs-comment">//我们需要处理这种情况，保证后面的代码正常运行！</span><br>System.out.println(<span class="hljs-string">"lbwnb"</span>);<br></code></pre></td></tr></table></figure>
+
+<p>我们可以使用<code>try</code>和<code>catch</code>语句块来处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];<br><span class="hljs-keyword">try</span>&#123;    <span class="hljs-comment">//在try块中运行代码</span><br>     arr[<span class="hljs-number">5</span>] = <span class="hljs-number">1</span>;    <span class="hljs-comment">//当代码出现异常时，异常会被捕获，并在catch块中得到异常类型的对象</span><br>&#125;<span class="hljs-keyword">catch</span> (ArrayIndexOutOfBoundsException e)&#123;   <span class="hljs-comment">//捕获的异常类型</span><br>     System.out.println(<span class="hljs-string">&quot;程序运行出现异常！&quot;</span>);  <span class="hljs-comment">//出现异常时执行</span><br>&#125;<br><span class="hljs-comment">//后面的代码会正常运行</span><br>System.out.println(<span class="hljs-string"><code class="language-hljs java"><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];<br><span class="hljs-keyword">try</span>&#123;    <span class="hljs-comment">//在try块中运行代码</span><br>     arr[<span class="hljs-number">5</span>] = <span class="hljs-number">1</span>;    <span class="hljs-comment">//当代码出现异常时，异常会被捕获，并在catch块中得到异常类型的对象</span><br>&#125;<span class="hljs-keyword">catch</span> (ArrayIndexOutOfBoundsException e)&#123;   <span class="hljs-comment">//捕获的异常类型</span><br>     System.out.println(<span class="hljs-string">&quot;程序运行出现异常！&quot;</span>);  <span class="hljs-comment">//出现异常时执行</span><br>&#125;<br><span class="hljs-comment">//后面的代码会正常运行</span><br>System.out.println(<span class="hljs-string">"lbwnb"</span>);<br></code></pre></td></tr></table></figure>
+
+<p>当异常被捕获后，就由我们自己进行处理（不再交给JVM处理），因此就不会导致程序终止运行。</p>
+<p>我们可以通过使用<code>e.printStackTrace()</code>来打印栈追踪信息，定位我们的异常出现位置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs java">java.lang.ArrayIndexOutOfBoundsException: <span class="hljs-number">5</span><br>	at com.test.Main.main(Main.java:<span class="hljs-number">7</span>)    <span class="hljs-comment"><code class="language-hljs java">java.lang.ArrayIndexOutOfBoundsException: <span class="hljs-number">5</span><br>	at com.test.Main.main(Main.java:<span class="hljs-number">7</span>)    <span class="hljs-comment">//Main类的第7行出现问题</span><br>程序运行出现异常！<br>lbwnb<br></code></pre></td></tr></table></figure>
+
+<p>运行时异常在编译时可以不用捕获，但是编译时异常必须进行处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs java">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;my.txt&quot;</span>);<br><span class="hljs-keyword">try</span> &#123;<br>  file.createNewFile();<br>&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;  <span class="hljs-comment"><code class="language-hljs java">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;my.txt&quot;</span>);<br><span class="hljs-keyword">try</span> &#123;<br>  file.createNewFile();<br>&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;  <span class="hljs-comment">//捕获声明的异常类型</span><br>  e.printStackTrace();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以捕获到类型不止是<code>Exception</code>的子类，只要是继承自<code>Throwalbe</code>的类，都能被捕获，也就是说，<code>Error</code>也能被捕获，但是不建议这样做，因为错误一般是虚拟机相关的问题，出现<code>Error</code>应该从问题的根源去解决。</p>
+<h2 id="异常的抛出"><a href="#异常的抛出" class="headerlink" title="异常的抛出"></a>异常的抛出</h2><p>当别人调用我们的方法时，如果传入了错误的参数导致程序无法正常运行，这时我们就需要手动抛出一个异常来终止程序继续运行下去，同时告知上一级方法执行出现了问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;   <span class="hljs-comment">//捕获方法中会出现的异常</span><br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//声明抛出的异常类型</span><br>        <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常</span><br>        <span class="hljs-keyword">return</span> a/b;  <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;   <span class="hljs-comment">//捕获方法中会出现的异常</span><br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//声明抛出的异常类型</span><br>        <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常</span><br>        <span class="hljs-keyword">return</span> a/b;  <span class="hljs-comment">//抛出异常会终止代码运行</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>通过<code>throw</code>关键字抛出异常（抛出异常后，后面的代码不再执行）当程序运行到这一行时，就会终止执行，并出现一个异常。</p>
+<p>如果方法中抛出了非运行时异常，但是不希望在此方法内处理，而是交给调用者来处理异常，就需要在方法定义后面显式声明抛出的异常类型！如果抛出的是运行时异常，则不需要在方法后面声明异常类型，调用时也无需捕获，但是出现异常时同样会导致程序终止（出现运行时异常同时未被捕获会默认交给JVM处理，也就是直接中止程序并在控制台打印栈追踪信息）</p>
+<p>如果想要调用声明编译时异常的方法，但是依然不想去处理，可以同样的在方法上声明<code>throws</code>来继续交给上一级处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//出现异常就再往上抛，而不是在此方法内处理</span><br>  test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//声明抛出的异常类型</span><br>  <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常      </span><br>  <span class="hljs-keyword"><code class="language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//出现异常就再往上抛，而不是在此方法内处理</span><br>  test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;  <span class="hljs-comment">//声明抛出的异常类型</span><br>  <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常      </span><br>  <span class="hljs-keyword">return</span> a/b;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当main方法都声明抛出异常时，出现异常就由JVM进行处理，也就是默认的处理方式（直接中止程序并在控制台打印栈追踪信息）</p>
+<p>异常只能被捕获一次，当异常捕获出现嵌套时，只会在最内层被捕获：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;外层&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;内层&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword"><code class="language-hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;外层&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;内层&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> a/b;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>JDK为我们已经提前定义了一些异常了，但是可能对我们来说不够，那么就需要自定义异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Exception</span> </span>&#123;  <span class="hljs-comment">//直接继承即可</span><br>    <br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MyException </span>&#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException();   <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Exception</span> </span>&#123;  <span class="hljs-comment">//直接继承即可</span><br>    <br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MyException </span>&#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException();   <span class="hljs-comment">//直接使用</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可以使用父类的带描述的构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Exception</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyException</span><span class="hljs-params">(String message)</span></span>&#123;<br>        <span class="hljs-keyword">super</span>(message);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MyException </span>&#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException(<span class="hljs-string"><code class="language-hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Exception</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyException</span><span class="hljs-params">(String message)</span></span>&#123;<br>        <span class="hljs-keyword">super</span>(message);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MyException </span>&#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException(<span class="hljs-string">"出现了自定义的错误"</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>捕获异常指定的类型，会捕获其所有子异常类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException(<span class="hljs-string">&quot;出现了自定义的错误&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;    <span class="hljs-comment">//捕获父异常类型</span><br>  System.out.println(<span class="hljs-string"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MyException(<span class="hljs-string">&quot;出现了自定义的错误&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;    <span class="hljs-comment">//捕获父异常类型</span><br>  System.out.println(<span class="hljs-string">"捕获到异常"</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="多重异常捕获和finally关键字"><a href="#多重异常捕获和finally关键字" class="headerlink" title="多重异常捕获和finally关键字"></a>多重异常捕获和finally关键字</h2><p>当代码可能出现多种类型的异常时，我们希望能够分不同情况处理不同类型的异常，就可以使用多重异常捕获：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;<br>            <br>&#125; <span class="hljs-keyword">catch</span> (IndexOutOfBoundsException e)&#123;<br><br>&#125; <span class="hljs-keyword"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;<br>            <br>&#125; <span class="hljs-keyword">catch</span> (IndexOutOfBoundsException e)&#123;<br><br>&#125; <span class="hljs-keyword">catch</span> (RuntimeException e)&#123;<br>            <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意，类似于<code>if-else if</code>的结构，父异常类型只能放在最后！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (RuntimeException e)&#123;  <span class="hljs-comment">//父类型在前，会将子类的也捕获</span><br><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;   <span class="hljs-comment">//永远都不会被捕获</span><br><br>&#125; <span class="hljs-keyword">catch</span> (IndexOutOfBoundsException e)&#123;   <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (RuntimeException e)&#123;  <span class="hljs-comment">//父类型在前，会将子类的也捕获</span><br><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;   <span class="hljs-comment">//永远都不会被捕获</span><br><br>&#125; <span class="hljs-keyword">catch</span> (IndexOutOfBoundsException e)&#123;   <span class="hljs-comment">//永远都不会被捕获</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果希望把这些异常放在一起进行处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>     <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException | IndexOutOfBoundsException e) &#123;  <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>     <span class="hljs-comment">//....</span><br>&#125; <span class="hljs-keyword">catch</span> (NullPointerException | IndexOutOfBoundsException e) &#123;  <span class="hljs-comment">//用|隔开每种类型即可</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当我们希望，程序运行时，无论是否出现异常，都会在最后执行的任务，可以交给<code>finally</code>语句块来处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">//....</span><br>&#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            <br>&#125;<span class="hljs-keyword">finally</span> &#123;<br>  System.out.println(<span class="hljs-string">&quot;lbwnb&quot;</span>);   <span class="hljs-comment"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">//....</span><br>&#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            <br>&#125;<span class="hljs-keyword">finally</span> &#123;<br>  System.out.println(<span class="hljs-string">&quot;lbwnb&quot;</span>);   <span class="hljs-comment">//无论是否出现异常，都会在最后执行</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>try</code>语句块至少要配合<code>catch</code>或<code>finally</code>中的一个：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;<br>    a /= <span class="hljs-number">0</span>;<br>&#125;<span class="hljs-keyword">finally</span> &#123;  <span class="hljs-comment">//不捕获异常，程序会终止，但在最后依然会执行下面的内容</span><br>    System.out.println(<span class="hljs-string"><code class="language-hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;<br>    a /= <span class="hljs-number">0</span>;<br>&#125;<span class="hljs-keyword">finally</span> &#123;  <span class="hljs-comment">//不捕获异常，程序会终止，但在最后依然会执行下面的内容</span><br>    System.out.println(<span class="hljs-string">"lbwnb"</span>); <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>思考：<code>try</code>、<code>catch</code>和<code>finally</code>执行顺序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>&#123;<br>  <span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-keyword">return</span> a;<br>  &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>  &#125;<span class="hljs-keyword">finally</span> &#123;<br>    a =  a + <span class="hljs-number"><code class="language-hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>&#123;<br>  <span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-keyword">return</span> a;<br>  &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>  &#125;<span class="hljs-keyword">finally</span> &#123;<br>    a =  a + <span class="hljs-number">1</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="Java泛型与集合类"><a href="#Java泛型与集合类" class="headerlink" title="Java泛型与集合类"></a>Java泛型与集合类</h1><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h2 id="利用代码块来快速添加内容"><a href="#利用代码块来快速添加内容" class="headerlink" title="利用代码块来快速添加内容"></a>利用代码块来快速添加内容</h2><h1 id="Java-BIO"><a href="#Java-BIO" class="headerlink" title="Java BIO"></a>Java BIO</h1><h2 id="try-with-resourse"><a href="#try-with-resourse" class="headerlink" title="try-with-resourse"></a>try-with-resourse</h2><h1 id="Java-多线程"><a href="#Java-多线程" class="headerlink" title="Java 多线程"></a>Java 多线程</h1><h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1><h2 id="详谈类加载机制"><a href="#详谈类加载机制" class="headerlink" title="详谈类加载机制"></a>详谈类加载机制</h2><h1 id="Java注解"><a href="#Java注解" class="headerlink" title="Java注解"></a>Java注解</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaSE/">JavaSE</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/21/2.html/">
+                        <span class="hidden-mobile">Java对象和多态 （面向对象）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
