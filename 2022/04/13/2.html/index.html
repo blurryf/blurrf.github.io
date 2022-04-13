@@ -1,0 +1,893 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="xrt">
+  <meta name="keywords" content="">
+  <meta name="description" content="Linux操作系统与项目部署注意：本版块会涉及到操作系统相关知识。 现在，几乎所有智能设备都有一个自己的操作系统，比如我们的家用个人电脑，基本都是预装Windows操作系统，我们的手机也有Android和iOS操作系统，还有程序员比较青睐的MacBook，预装MacOS操作系统，甚至连Macbook的Touchbar都有一个自己的小型操作系统。  操作系统是管理计算机硬件与软件资源的计算机程序，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XRTing&#39;s Blog">
+<meta property="og:url" content="http://blurryf.github.io/2022/04/13/2.html/index.html">
+<meta property="og:site_name" content="XRTing&#39;s Blog">
+<meta property="og:description" content="Linux操作系统与项目部署注意：本版块会涉及到操作系统相关知识。 现在，几乎所有智能设备都有一个自己的操作系统，比如我们的家用个人电脑，基本都是预装Windows操作系统，我们的手机也有Android和iOS操作系统，还有程序员比较青睐的MacBook，预装MacOS操作系统，甚至连Macbook的Touchbar都有一个自己的小型操作系统。  操作系统是管理计算机硬件与软件资源的计算机程序，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171116%2F4f98ec55839b434cba335319b5ebf963.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645350734&t=099b0e4fb640617498cc40939e7e2070">
+<meta property="og:image" content="https://www.webdesignerdepot.com/cdn-origin/uploads/2009/03/mac-os-1.gif">
+<meta property="og:image" content="https://pics5.baidu.com/feed/b7003af33a87e950dd561c8ef220e945faf2b4ab.jpeg?token=b2063459ad19e976ed42754e5f9caea8">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0914%2F1833179ap00qzeyx5000cc000go009qg.png%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645451358&t=082f4539e97a1a3c9dc8002847e9ad5a">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fqnam.smzdm.com%2F202002%2F08%2F5e3e59003360f5288.jpg_e680.jpg&refer=http%3A%2F%2Fqnam.smzdm.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645451543&t=f2471b52851d92920194d2ef2acbab6f">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.iasptk.com%2Fwp-content%2Fuploads%2Fsites%2F12%2F2017%2F03%2FUbuntu-02804350.jpg&refer=http%3A%2F%2Fwww.iasptk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645453389&t=d7908bc10978585c9ce374cc8013ff64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190415191752939.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17163728-8d41eb59e5cfb7ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/904">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg0.pconline.com.cn%2Fpconline%2F2107%2F02%2F14306786_05_thumb.jpg&refer=http%3A%2F%2Fimg0.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645608268&t=75ea125c46cb38b22268156794b986d4">
+<meta property="og:image" content="http://c.biancheng.net/uploads/allimg/180914/1-1P9141F35R32.jpg">
+<meta property="article:published_time" content="2022-04-13T11:19:47.925Z">
+<meta property="article:modified_time" content="2022-04-13T11:19:48.052Z">
+<meta property="article:author" content="xrt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171116%2F4f98ec55839b434cba335319b5ebf963.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645350734&t=099b0e4fb640617498cc40939e7e2070">
+  
+  <title>XRTing&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blurryf.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XRTing</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-13 19:19" pubdate>
+        2022年4月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      25k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      78 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171116%2F4f98ec55839b434cba335319b5ebf963.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645350734&t=099b0e4fb640617498cc40939e7e2070" srcset="/img/loading.gif" lazyload alt="点击查看图片来源"></p>
+<h1 id="Linux操作系统与项目部署"><a href="#Linux操作系统与项目部署" class="headerlink" title="Linux操作系统与项目部署"></a>Linux操作系统与项目部署</h1><p><strong>注意：</strong>本版块会涉及到<code>操作系统</code>相关知识。</p>
+<p>现在，几乎所有智能设备都有一个自己的操作系统，比如我们的家用个人电脑，基本都是预装Windows操作系统，我们的手机也有Android和iOS操作系统，还有程序员比较青睐的MacBook，预装MacOS操作系统，甚至连Macbook的Touchbar都有一个自己的小型操作系统。</p>
+<blockquote>
+<p>操作系统是管理计算机硬件与软件资源的计算机程序，操作系统可以对计算机系统的各项资源板块开展调度工作，运用计算机操作系统可以减少人工资源分配的工作强度。</p>
+</blockquote>
+<p>在我们的电脑没有操作系统的情况下，它就是一堆电子元器件组合而成的机器，就像我们有了一具完整的身体，但是现在缺少的是一个大脑，来控制我们的身体做出各种动作和行为，而安装了操作系统，就像为电脑注入了灵魂，操作系统会帮助我们对所有的硬件进行调度和管理。</p>
+<p>比如我们现在最常用的Windows操作系统，我们可以在系统中做各种各样的事情，包括游戏、看片、学习、编程等，而所有的程序正是基于操作系统之上运行的，操作系统帮助我们与底层硬件进行交互，而在程序中我们只需要告诉操作系统我们需要做什么就可以了，操作系统知道该如何使用和调度底层的硬件，来完成我们程序中指定的任务。</p>
+<p>（如果你在自己电脑上安装过Windows操作系统，甚至自己打过驱动程序，或是使用安装过Linux任意发行版本，那么本章学习起来会比较轻松）</p>
+<h2 id="发展简史"><a href="#发展简史" class="headerlink" title="发展简史"></a>发展简史</h2><p>这是整个SpringBoot阶段的最后部分了，为了不让学习那么枯燥，我们先来讲点小故事。</p>
+<p>在1965年，当时还处于批处理操作系统的时代，但是它只能同时供一个用户使用，而当时人们正希望能够开发一种交互式的、具有多道程序处理能力的分时操作系统。于是，贝尔实验室、美国麻省理工学院和通用电气公司联合发起了一项名为 Multics 的工程计划，而目的也是希望能够开发出这样的一个操作系统，但是最终由于各种原因以失败告终。</p>
+<p>以肯•汤普森为首的贝尔实验室研究人员吸取了 Multics 工程计划失败的经验教训，于 1969 年实现了分时操作系统的雏形，在1970 年该操作系统正式取名为<strong>UNIX</strong>，它是一个强大的多用户、多任务操作系统，支持多种处理器架构，1973 年，也就是C语言问世不久后，UNIX操作系统的绝大部分源代码都用C语言进行了重写。</p>
+<p>从这之后，大量的UNIX发行版本涌现（基于Unix进行完善的系统）比如 FreeBSD 就是美国加利福尼亚大学伯克利分校开发的 UNIX 版本，它由来自世界各地的志愿者开发和维护，为不同架构的计算机系统提供了不同程度的支持。</p>
+<p> 而后来1984年苹果公司发布的的MacOS（在Macintosh电脑上搭载）操作系统，正是在 FreeBSD 基础之上开发的全新操作系统，这是首次计算机正式跨进图形化时代，具有里程碑的意义。</p>
+<p><img src="https://www.webdesignerdepot.com/cdn-origin/uploads/2009/03/mac-os-1.gif" srcset="/img/loading.gif" lazyload alt="Mac OS"></p>
+<p>同年，乔布斯非常高兴地将自家的图形化MacOS界面展示给微软创始人比尔盖茨，并且希望微软可以为MacOS开发一些软件。比尔盖茨一看，woc，这玩意牛逼啊，咱们自己也给安排一个。于是，在1985年，微软仿造MacOS并基于MS-DOS操作系统，开发出了名为Windows的操作系统：</p>
+<p><img src="https://pics5.baidu.com/feed/b7003af33a87e950dd561c8ef220e945faf2b4ab.jpeg?token=b2063459ad19e976ed42754e5f9caea8" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>Windows操作系统的问世，无疑是对MacOS的一次打击，因为MacOS只能搭载在Mac上，但是售价实在太贵，并且软件生态也不尽人意，同时代的Windows却能够安装到各种各样的DIY电脑上，称其为PC，尤其是后来的Windows95，几乎是封神的存在，各种各样基于Windows的软件、游戏层出不穷，以至于到今天为止，MacOS的市场占有率依然远低于Windows，不过Apple这十几年一直在注重自家软件生态的发展，总体来说在办公领域体验感其实和Windows差不多，甚至可能还更好，但是打游戏，别想了。</p>
+<p>说了这么多，Linux呢，怎么一句都没提它呢？最牛逼的当然放最后说（不是</p>
+<p>Unix虽然强大但是有着昂贵的授权费用，并且不开放源代码，于是有人发起了GNU运动（GNU IS NOT UNIX，带有那么一丝嘲讽），模仿 Unix 的界面和使用方式，从头做一个开源的版本。在1987年荷兰有个大学教授安德鲁写了一个Minix，类似于Unix，专用于教学。当Minix流传开来之后，世界各地的黑客们纷纷开始使用并改进，希望把改进的东西合并到Minix中，但是安德鲁觉得他的系统是用于教学的，不能破坏纯净性，于是拒绝了。</p>
+<p>在1991年，林纳斯.托瓦兹（Linus Torvalds）认为Minix不够开放，自己又写了一个全新的开源操作系统，它希望这个系统由全世界的爱好者一同参与开发，并且不收费，于是Linux内核就被公开发布到互联网上。一经发布，便引起了社会强烈的反响，在大家的努力下，于1994年Linux的1.0版本正式发布。结合当时的GNU运动，最终合在一起称为了GNU/Linux，以一只企鹅Tux作为吉祥物。</p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0914%2F1833179ap00qzeyx5000cc000go009qg.png%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645451358&t=082f4539e97a1a3c9dc8002847e9ad5a" srcset="/img/loading.gif" lazyload alt="点击查看图片来源"></p>
+<p>没错，Git也是林纳斯.托瓦兹只花了2周时间开发的。不过林纳斯非常讨厌C++，他认为C++只会让一个项目变得混乱。</p>
+<p>从此以后，各式各样的基于Linux发行版就开始出现：</p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fqnam.smzdm.com%2F202002%2F08%2F5e3e59003360f5288.jpg_e680.jpg&refer=http%3A%2F%2Fqnam.smzdm.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645451543&t=f2471b52851d92920194d2ef2acbab6f" srcset="/img/loading.gif" lazyload alt="点击查看图片来源"></p>
+<p>这些发行版都是在Linux内核的基础之上，添加了大量的额外功能，包括开发环境、图形化桌面、包管理等。包括我们的安卓系统，也是基于Linux之上的，而我们要重点介绍的就是基于Debian之上的Ubuntu操作系统。</p>
+<p>最后，2022年了，我们再来看一下各大操作系统的市场占有率：</p>
+<ul>
+<li>Windows11/10/7：80%</li>
+<li>MacOS：11%</li>
+<li>Linux：5%</li>
+<li>其他：4%</li>
+</ul>
+<p>Windows无疑是现在最广泛的操作系统，尤其是Windows XP，是多少00后的青春，很多游戏都是基于Windows平台。当然，如果你已经厌倦了游戏，一心只读圣贤书的话，那么还是建议直接使用任意Linux桌面版或是Mac，因为它们能够为你提供极致和纯粹的开发体验（貌似之前华为也出过Linux笔记本？）</p>
+<hr>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.iasptk.com%2Fwp-content%2Fuploads%2Fsites%2F12%2F2017%2F03%2FUbuntu-02804350.jpg&refer=http%3A%2F%2Fwww.iasptk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645453389&t=d7908bc10978585c9ce374cc8013ff64" srcset="/img/loading.gif" lazyload alt="点击查看图片来源"></p>
+<h2 id="安装Ubuntu系统"><a href="#安装Ubuntu系统" class="headerlink" title="安装Ubuntu系统"></a>安装Ubuntu系统</h2><p>这里我们就以安装虚拟机的方式在我们的电脑上安装Linux操作系统，我们选用Ubuntu作为教程，如果有经济实力，可以在腾讯云、阿里云之类的服务商购买一台云服务器，并选择预装Ubuntu系统；如果你还想搞嵌入式开发之类的工作，可以购买一台树莓派服务器，也可以在上面安装Ubuntu系统，相当于一台迷你主机。在你已经有云服务器的情况下，可以直接跳过虚拟机安装教学。</p>
+<p>官网下载：<a target="_blank" rel="noopener" href="https://cn.ubuntu.com/download/server/step1">https://cn.ubuntu.com/download/server/step1</a></p>
+<p>注意是下载服务器版本，不是桌面版本。</p>
+<h3 id="在虚拟机中安装"><a href="#在虚拟机中安装" class="headerlink" title="在虚拟机中安装"></a>在虚拟机中安装</h3><p>这里我们使用VMware进行安装，VMware是一个虚拟化应用程序，它可以在我们当前运行的操作系统之上，创建一个虚线的主机，相当于创建了一台电脑，而我们就可以在这台电脑上安装各种各样的操作系统，并且我们可以自由为其分配CPU核心和内存以及硬盘容量（如果你接触过云计算相关内容，应该会对虚拟化技术有所了解）</p>
+<p>官网下载：<a target="_blank" rel="noopener" href="https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html">https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html</a></p>
+<p>安装完成后，会出现一个类似于CMD的命令窗口，而我们就是通过输入命令来操作我们的操作系统。</p>
+<h3 id="使用SSH远程连接"><a href="#使用SSH远程连接" class="headerlink" title="使用SSH远程连接"></a>使用SSH远程连接</h3><p>如果你使用的是树莓派或是云服务器，那么你会得到一个公网的IP地址，以及默认的用户名和密码，由于服务器安装的Ubuntu并不是在我们的电脑上运行的，那么我们怎么去远程操作呢？</p>
+<p>比如我们要远程操作一台Windows电脑，直接使用远程桌面连接即可，但是Ubuntu上来就是命令行，这种情况下要实现远程连接就只能使用SSH终端。</p>
+<p>SSH是一种网络协议，用于计算机之间的加密登录。如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
+<p>云服务器上安装的Ubuntu默认都是自带了OpenSSH服务端的，我们可以直接连接，如果你的Ubuntu服务器上没有安装OpenSSH服务器端，那么可以输入命令进行安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs shell">sudo apt install openssh-server<br><span class="hljs-meta">#</span><span class="bash"><code class="language-hljs shell">sudo apt install openssh-server<br><span class="hljs-meta">#</span><span class="bash">输入后还需要你输入当前用户的密码才可以执行，至于为什么我们后面会说</span><br></code></pre></td></tr></table></figure>
+
+<p>这里我们使用XShell来进行SSH登陆，官网：<a target="_blank" rel="noopener" href="https://www.netsarang.com/zh/free-for-home-school/">https://www.netsarang.com/zh/free-for-home-school/</a></p>
+<h3 id="文件系统介绍"><a href="#文件系统介绍" class="headerlink" title="文件系统介绍"></a>文件系统介绍</h3><p>在Windows下，我们的整个硬盘实际上可以被分为多个磁盘驱动器：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190415191752939.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>我们一般习惯将软件装到D盘，文件数据存在E盘，系统和一些环境安装在C盘，根据不同的盘符进行划分，并且每个盘都有各自的存储容量大小。而在Linux中，没有这个概念，所有的文件都是位于根目录下的：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/17163728-8d41eb59e5cfb7ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/904" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>我们可以看到根目录下有很多个文件夹，它们都有着各自的划分：</p>
+<ul>
+<li>/bin 可执行二进制文件的目录，如常用的命令 ls、tar、mv、cat 等实际上都是一些小的应用程序</li>
+<li>/home 普通用户的主目录，对应Windows下的C:/Users/用户名/</li>
+<li>/root root用户的主目录（root用户是具有最高权限的用户，之后会讲）</li>
+<li>/boot 内核文件的引导目录, 放置 linux 系统启动时用到的一些文件</li>
+<li>/sbing 超级用户使用的指令文件</li>
+<li>/tmp 临时文件目录，一般用户或正在执行的程序临时存放文件的目录，任何人都可以访问，重要数据不可放置在此目录下。</li>
+<li>/dev 设备文件目录，在Linux中万物皆文件，实际上你插入的U盘等设备都会在dev目录下生成一个文件，我们可以很方便地通过文件IO方式去操作外设，对嵌入式开发极为友好。</li>
+<li>/lib 共享库，系统使用的函数库的目录，程序在执行过程中，需要调用一些额外的参数时需要函数库的协助。</li>
+<li>/usr 第三方 程序目录</li>
+<li>/etc 配置程序目录，系统配置文件存放的目录</li>
+<li>/var 可变文件，放置系统执行过程中经常变化的文件</li>
+<li>/opt 用户使用目录，给主机额外安装软件所摆放的目录。</li>
+</ul>
+<p>我们可以直接输入命令来查看目录下的所有文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><span class="hljs-meta">#</span><span class="bash">只显示文件名称，且不显示隐藏文件</span><br>ls<br><span class="hljs-meta">#</span><span class="bash"><code class="language-hljs shell"><span class="hljs-meta">#</span><span class="bash">只显示文件名称，且不显示隐藏文件</span><br>ls<br><span class="hljs-meta">#</span><span class="bash">显示隐藏文件以及文件详细信息</span><br>ll<br></code></pre></td></tr></table></figure>
+
+<p>那么我们如何才能像Windows那样方便的管理Linux中的文件呢？我们可以使用FTP管理工具，默认情况下Ubuntu是安装了SFTP服务器的。</p>
+<p>这里我们使用Xftp来进行管理，官网：<a target="_blank" rel="noopener" href="https://www.netsarang.com/zh/free-for-home-school/">https://www.netsarang.com/zh/free-for-home-school/</a></p>
+<hr>
+<h2 id="用户和用户组"><a href="#用户和用户组" class="headerlink" title="用户和用户组"></a>用户和用户组</h2><p>我们整个Linux阶段的学习主要是以实操为主，大量的命令需要大量的使用才能记得更牢固。</p>
+<p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统的用户，都必须申请一个账号，然后以这个账号的身份进入系统。比如我们之前就是使用我们在创建服务器时申请的初始用户test，通过输入用户名和密码登录到系统中，之后才能使用各种命令进行操作。其实用户机制和我们的Windows比较类似。一般的普通用户只能做一些比较基本的操作，并且只能在自己的目录（如/home/test）中进行文件的创建和删除操作。</p>
+<p>我们可以看到，当前状态信息分为三段：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$<br></code></pre></td></tr></table></figure>
+
+<p>格式为：用户名@服务器名称:当前所处的目录$，其中~代表用户目录，如果不是用户目录，会显示当前的绝对路径地址。我们也可以使用<code>pwd</code>命令来直接查看当前所处的目录。</p>
+<p>在Linux中默认存在一个超级用户root，而此用户拥有最高执行权限，它能够修改任何的内容，甚至可以删除整个Linux内核，正常情况下不会使用root用户进行登陆，只有在特殊情况下才会使用root用户来进行一些操作，root用户非常危险，哪怕一个小小的命令都能够毁掉整个Linux系统，比如<code>rm -rf /*</code>，感兴趣的话我们可以放在最后来演示（在以前老是听说安卓手机root，实际上就是获取安卓系统底层Linux系统的root权限，以实现修改系统文件的目的）</p>
+<p>我们可以使用<code>sudo -s</code>并输入当前用户的密码切换到root用户，可以看到出现了一些变化：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$<br><br>root@ubuntu-server:/home/test#<br></code></pre></td></tr></table></figure>
+
+<p>我们发现<code>$</code>符号变成了<code>#</code>符号，注意此符号表示当前的用户权限等级，并且test也变为了root，在此用户下，我们可以随意修改test用户文件夹以外的内容，而test用户下则无法修改。如果需要退出root用户，直接输入<code>exit</code>即可。</p>
+<p>接着我们来看一下，如何进行用户的管理操作，进行用户管理，包括添加用户和删除用户都需要root权限才可以执行，但是现在我们是test用户，我们可以在命令前面添加<code>sudo</code>来暂时以管理员身份执行此命令，比如说我们现在想要添加一个新的用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">sudo useradd study<br></code></pre></td></tr></table></figure>
+
+<p>其中<code>study</code>就是我们想要创建的新用户，<code>useradd</code>命令就是创建新用户的命令，同样的，删除用户：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><code class="language-hljs sh">sudo userdel study<br></code></pre></td></tr></table></figure>
+
+<p>Linux中的命令一般都可以携带一些参数来以更多特地的方式执行，我们可以在创建用户时，添加一些额外的参数来进行更多高级操作：</p>
+<ul>
+<li>-d&lt;登录目录&gt; 　指定用户登录时的起始目录。</li>
+<li>-g&lt;群组&gt; 　指定用户所属的群组。</li>
+<li>-G&lt;群组&gt; 　指定用户所属的附加群组。</li>
+<li>-m 　自动建立用户的登入目录。</li>
+<li>-M 　不要自动建立用户的登入目录。</li>
+<li>-s  指定Shell，一般指定为/bin/bash</li>
+</ul>
+<p>如果还想查看更多命令，可以直接使用<code>man</code>来查看命令的详细参数列表，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">man useradd<br></code></pre></td></tr></table></figure>
+
+<p>比如我们现在需要在用户创建时顺便创建用户的文件夹，并指定shell（任意一种命令解释程序，用于处理我们输入的命令）为bash：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">sudo useradd study -m -s /bin/bash<br></code></pre></td></tr></table></figure>
+
+<p>可以看到已经自动在home目录下创建了study文件夹（这里..表示上一级目录，.表示当前目录）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$ ls ..<br>study  test<br></code></pre></td></tr></table></figure>
+
+<p>用户创建完成之后，我们可以为此用户设定密码（如果不指定用户，那么会设置当前用户的密码）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">sudo passwd study<br></code></pre></td></tr></table></figure>
+
+<p>输入密码之后，我们可以使用命令来切换用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$ su - study<br>Password: <br>study@ubuntu-server:~$ <br></code></pre></td></tr></table></figure>
+
+<p>可以看到，切换用户后名称已经修改为study了，我们使用<code>exit</code>即可退出当前用户回到test。</p>
+<p>输入<code>who</code>可以查看当前登录账号（注意是登录的账号）输入<code>whoami</code>可以查看当前的操作账号：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$ su study<br>Password: <br>study@ubuntu-server:/home/test$ cd ~<br>study@ubuntu-server:~$ who<br>test     pts/0        2022-01-24 03:57 (192.168.10.3)<br>study@ubuntu-server:~$ whoami<br>study<br>study@ubuntu-server:~$ <br></code></pre></td></tr></table></figure>
+
+<p>接着我们来看用户组，每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。我们可以输入<code>groups</code>来查看当前用户所有的用户组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ groups<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ groups<br><span class="hljs-built_in">test</span> adm cdrom sudo dip plugdev lxd<br></code></pre></td></tr></table></figure>
+
+<p>我们可以输入<code>id</code>来查看用户所属的用户相关信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ id<br>uid=1000(<span class="hljs-built_in">test</span>) gid=1000(<span class="hljs-built_in">test</span>) groups=1000(<span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ id<br>uid=1000(<span class="hljs-built_in">test</span>) gid=1000(<span class="hljs-built_in">test</span>) groups=1000(<span class="hljs-built_in">test</span>),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lxd)<br></code></pre></td></tr></table></figure>
+
+<p>我们可以看到test用户默认情况下主要用户组为同名的test用户组，并且还属于一些其他的用户组，其中sudo用户组就表示可以执行<code>sudo</code>命令，我们发现我们创建的study用户没有sudo的执行权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh">study@ubuntu-server:~$ sudo -s<br>[sudo] password <span class="hljs-keyword">for</span> study: <br>study is not <span class="hljs-keyword"><code class="language-hljs sh">study@ubuntu-server:~$ sudo -s<br>[sudo] password <span class="hljs-keyword">for</span> study: <br>study is not <span class="hljs-keyword">in</span> the sudoers file.  This incident will be reported.<br></code></pre></td></tr></table></figure>
+
+<p>正是因为没有加入到sudo用户组，这里我们来尝试将其添加到sudo用户组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ id study<br>uid=1001(study) gid=1001(study) groups=1001(study)<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>usermod</code>命令来对用户的相关设置进行修改，参数与useradd大致相同：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo usermod study -G sudo<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo usermod study -G sudo<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ id study<br>uid=1001(study) gid=1001(study) groups=1001(study),27(sudo)<br></code></pre></td></tr></table></figure>
+
+<p>接着切换到study用户就可以使用sudo命令了：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs sh">To run a <span class="hljs-built_in">command</span> as administrator (user <span class="hljs-string">&quot;root&quot;</span>), use <span class="hljs-string">&quot;sudo &lt;command&gt;&quot;</span>.<br>See <span class="hljs-string">&quot;man sudo_root&quot;</span> <span class="hljs-keyword">for</span> details.<br><br>study@ubuntu-server:/home/<span class="hljs-built_in">test</span>$ sudo -s<br>[sudo] password <span class="hljs-keyword">for</span> study: <br>root@ubuntu-server:/home/<span class="hljs-built_in">test</span><span class="hljs-comment"><code class="language-hljs sh">To run a <span class="hljs-built_in">command</span> as administrator (user <span class="hljs-string">&quot;root&quot;</span>), use <span class="hljs-string">&quot;sudo &lt;command&gt;&quot;</span>.<br>See <span class="hljs-string">&quot;man sudo_root&quot;</span> <span class="hljs-keyword">for</span> details.<br><br>study@ubuntu-server:/home/<span class="hljs-built_in">test</span>$ sudo -s<br>[sudo] password <span class="hljs-keyword">for</span> study: <br>root@ubuntu-server:/home/<span class="hljs-built_in">test</span><span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>实际上，我们的用户信息是存储在配置文件中的，我们之前说了，配置文件一般都放在etc目录下，而用户和用户组相关的配置文件，存放在<code>/etc/passwd</code>和<code>/etc/group</code>中，我们可以使用cat命令将文件内容打印到控制台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs bash"><span class="hljs-built_in"><code class="language-hljs bash"><span class="hljs-built_in">test</span>@ubuntu-server:~$ cat /etc/passwd<br>root:x:0:0:root:/root:/bin/bash<br>daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin<br>bin:x:2:2:bin:/bin:/usr/sbin/nologin<br>sys:x:3:3:sys:/dev:/usr/sbin/nologin<br>sync:x:4:65534:sync:/bin:/bin/sync<br></code></pre></td></tr></table></figure>
+
+<p>格式为：<code>注册名:口令:用户标识号:组标识号:用户名:用户主目录:命令解释程序 </code>，而我们的密码则存放在<code>/etc/shadow</code>中，是以加密形式存储的，并且需要root权限才能查看。</p>
+<hr>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>接着我们来看一下Linux系统中一些比较常用的命令。</p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>文件是最基本的内容，我们可以使用ls命令列出当前目录中所有的文件，参数-a表示包含所有的隐藏文件，-l表示列出详细信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -al<br>total 44<br>drwxr-xr-x 4 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 08:55 .<br>drwxr-xr-x 4 root root 4096 Jan 24 04:24 ..<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 2124 Jan 24 04:29 .bash_history<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>  220 Feb 25  2020 .bash_logout<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 3771 Feb 25  2020 .bashrc<br>drwx------ 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 21 15:48 .cache<br>drwx------ 3 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 23 14:49 .config<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>  807 Feb 25  2020 .profile<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>   34 Jan 24 04:17 .python_history<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>    0 Jan 21 15:52 .sudo_as_admin_successful<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -al<br>total 44<br>drwxr-xr-x 4 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 08:55 .<br>drwxr-xr-x 4 root root 4096 Jan 24 04:24 ..<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 2124 Jan 24 04:29 .bash_history<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>  220 Feb 25  2020 .bash_logout<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 3771 Feb 25  2020 .bashrc<br>drwx------ 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 21 15:48 .cache<br>drwx------ 3 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 23 14:49 .config<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>  807 Feb 25  2020 .profile<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>   34 Jan 24 04:17 .python_history<br>-rw-r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>    0 Jan 21 15:52 .sudo_as_admin_successful<br>-rw------- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 7201 Jan 24 08:55 .viminfo<br></code></pre></td></tr></table></figure>
+
+<p>可以看到当前目录下的整个文件列表，那么这些信息各种代表什么意思呢，尤其是最前面那一栏类似于<code>drwxr-xr-x</code>的字符串。</p>
+<p>它表示文件的属性，其中第1个字符表示此文件的类型：<code>-</code>表示普通文件，<code>l</code>为链接文件，<code>d</code>表示目录（文件夹），<code>c</code>表示字符设备、<code>b</code>表示块设备，还有<code>p</code>有名管道、<code>f</code>堆栈文件、<code>s</code>套接字等，这些一般都是用于进程之间通信使用的。</p>
+<p>第2-4个字符表示文件的拥有者（User）对该文件的权限，第5-7个字符表示文件所属用户组（Group）内用户对该文件的权限，最后8-10个字符表示其他用户（Other）对该文件的权限。其中<code>r</code>为读权限、<code>w</code>为写权限、<code>x</code>为执行权限，为了方便记忆，直接记UGO就行了。</p>
+<p>比如<code>drwxr-xr-x</code>就表示这是一个目录，文件的拥有者可以在目录中读、写和执行，而同一用户组的其他用户只能读和执行，其他用户也是一样。</p>
+<p>第二栏数据可以看到是一列数字，它表示文件创建的链接文件（快捷方式）数量，一般只有1表示只有当前文件，我们也可以尝试创建一个链接文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ ln .bash_logout kk<br></code></pre></td></tr></table></figure>
+
+<p>创建后，会生成一个名为kk的文件，我们对此文件的操作相当于直接操作.bash_logout，跟Windows中的快捷方式比较类似，了解一下即可。再次执行<code>ll</code>命令，可以看到.bash_logout的链接数变成了2。</p>
+<p>第三栏数据为该文件或是目录的拥有者。</p>
+<p>第四栏数据表示所属的组。</p>
+<p>第五栏数据表示文件大小，以字节为单位。</p>
+<p>第六栏数据为文件的最后一次修改时间</p>
+<p>最后一栏就是文件名称了，就不多说了，再次提及..表示上级目录，.表示当前目录，最前面有一个.开头的文件为隐藏文件。可以看到上级目录（也就是/home目录）所有者为root，并且非root用户无法进行写操作，只能执行读操作，而当前目录以及目录下所有文件则属于test用户，test用户可以随意进行修改。</p>
+<p>在了解了Linux的文件查看之后再去看Windows的文件管理，会觉得Windows的太拉了：</p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg0.pconline.com.cn%2Fpconline%2F2107%2F02%2F14306786_05_thumb.jpg&refer=http%3A%2F%2Fimg0.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645608268&t=75ea125c46cb38b22268156794b986d4" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>那么，如果我们希望对文件的属性进行修改，比如我们现在希望将某个文件的写权限给关闭，可以使用<code>chmod</code>命令来进行文件属性修改，我们先创建一个test文件，使用<code>touch</code>命令来创建文件，使用<code>mkdir</code>命令来创建目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs shell"><code class="language-hljs shell">test@ubuntu-server:~$ touch test<br>test@ubuntu-server:~$ ll test<br>-rw-rw-r-- 1 test test 0 Jan 24 09:32 test<br></code></pre></td></tr></table></figure>
+
+<p>可以看到文件创建之后的默认权限为可读可写，接着我们来将其修改为只读，chmod的使用方法如下：</p>
+<ul>
+<li>chmod (u/g/o/a)(+/-)(r/w/x) 文件名称</li>
+</ul>
+<p>我们可以从ugo中选择或是直接a表示所有，+和-表示添加和删除权限，最后rwx不用我说了吧</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod a-w <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ll <span class="hljs-built_in">test</span><br>-r--r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 0 Jan 24 09:32 <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod a-w <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ll <span class="hljs-built_in">test</span><br>-r--r--r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 0 Jan 24 09:32 <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>除了这种方式之外，我们也可以使用数字来代替，比如现在我要给前两个添加读权限，那么：</p>
+<p>约定：r=4，w=2，x=1，需要什么权限就让对应权限的数字相加，一个数字表示一个rwx的权限状态，比如我们想修改为<code>-rw-rw-r--</code>，那么对应的数字就是<code>664</code>，对应的命令为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod 664 <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ll <span class="hljs-built_in">test</span><br>-rw-rw-r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 0 Jan 24 09:32 <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod 664 <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ll <span class="hljs-built_in">test</span><br>-rw-rw-r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 0 Jan 24 09:32 <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>如果我们想修改文件的拥有者或是所属组，可以使用<code>chown</code>和<code>chgrp</code>命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo chown root <span class="hljs-built_in">test</span> <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 0<br>-rw-rw-r-- 1 root <span class="hljs-built_in">test</span> 0 Jan 24 10:43 <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo chgrp root <span class="hljs-built_in">test</span> <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 0<br>-rw-rw-r-- 1 root root 0 Jan 24 10:43 <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo chown root <span class="hljs-built_in">test</span> <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 0<br>-rw-rw-r-- 1 root <span class="hljs-built_in">test</span> 0 Jan 24 10:43 <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo chgrp root <span class="hljs-built_in">test</span> <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 0<br>-rw-rw-r-- 1 root root 0 Jan 24 10:43 <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>再次操作该文件，会发现没权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod 777 <span class="hljs-built_in">test</span> <br>chmod: changing permissions of <span class="hljs-string"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ chmod 777 <span class="hljs-built_in">test</span> <br>chmod: changing permissions of <span class="hljs-string">&#x27;test&#x27;</span>: Operation not permitted<br></code></pre></td></tr></table></figure>
+
+<p>接着我们来看文件的复制、移动和删除，这里我们先创建一个新的目录并进入到此目录用于操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir study<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir study<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study$<br></code></pre></td></tr></table></figure>
+
+<p>首先我们演示文件的复制操作，文件的复制使用<code>cp</code>命令，比如现在我们想把上一级目录中的test文件复制到当前目录中：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ cp ../<span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ ls<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ cp ../<span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ ls<br><span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>那么如果我们想要将一整个目录进行复制呢？我们需要添加一个<code>-r</code>参数表示将目录中的文件递归复制：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ <span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ cp -r study study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 8<br>drwxrwxr-x 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 10:16 study<br>drwxrwxr-x 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 10:20 study_copied<br>-rw-rw-r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>    0 Jan 24 09:32 <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study$ <span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ cp -r study study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls -l<br>total 8<br>drwxrwxr-x 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 10:16 study<br>drwxrwxr-x 2 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> 4096 Jan 24 10:20 study_copied<br>-rw-rw-r-- 1 <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span>    0 Jan 24 09:32 <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看到我们的整个目录中所有的文件也一起被复制了。</p>
+<p>接着我们来看看移动操作，相当于是直接将一个文件转移到另一个目录中了，我们再创建一个目录用于文件的移动，并将test文件移动到此目录中，我们使用<code>mv</code>命令进行文件的移动：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv <span class="hljs-built_in">test</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>study  study2  study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv <span class="hljs-built_in">test</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>study  study2  study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br><span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>现在我们想要移动个目录到另一个目录中，比如我们想将study目录移动到study2目录中：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv study study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>study2  study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br>study  <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv study study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>study2  study_copied<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br>study  <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p><code>mv</code>命令不仅能实现文件的移动，还可以实现对文件重命名操作，比如我们想将文件test重命名为yyds，那么直接将其进行移动操作即可：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br>study  <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ mv <span class="hljs-built_in">test</span> yyds<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br>study  <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ mv <span class="hljs-built_in">test</span> yyds<br><span class="hljs-built_in">test</span>@ubuntu-server:~/study2$ ls<br>study  yyds<br></code></pre></td></tr></table></figure>
+
+<p>最后就是删除命令了，使用<code>rm</code>进行删除操作，比如现在我们想删除study2目录（注意需要添加-r参数表示递归删除文件夹中的内容）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm -r study2<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm -r study2<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>study_copied<br></code></pre></td></tr></table></figure>
+
+<p>而最常提到的<code>rm -rf /*</code>正是删除根目录下所有的文件（非常危险的操作），-f表示忽略不存在的文件，不进行任何提示，*是一个通配符，表示任意文件。这里我们演示一下删除所有.txt结尾的文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ touch 1.txt 2.txt 3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>1.txt  2.txt  3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm *.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ touch 1.txt 2.txt 3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>1.txt  2.txt  3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm *.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <br></code></pre></td></tr></table></figure>
+
+<p>最后我们再来看文件的搜索，我们使用find命令来进行搜索，比如我想搜索/etc目录下名为passwd的文件：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs gradle">test@ubuntu-server:~$ sudo <span class="hljs-keyword">find</span> /etc -name passwd<br>[sudo] password <span class="hljs-keyword">for</span> test: <br><span class="hljs-regexp">/etc/</span>pam.d/passwd<br><span class="hljs-regexp"><code class="language-hljs gradle">test@ubuntu-server:~$ sudo <span class="hljs-keyword">find</span> /etc -name passwd<br>[sudo] password <span class="hljs-keyword">for</span> test: <br><span class="hljs-regexp">/etc/</span>pam.d/passwd<br><span class="hljs-regexp">/etc/</span>passwd<br></code></pre></td></tr></table></figure>
+
+<p>它还支持通配符，比如搜索以s开头的文件：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre class=" language-hljs gradle">test@ubuntu-server:~$ sudo <span class="hljs-keyword">find</span> /etc -name s*<br><span class="hljs-regexp">/etc/</span>subuid<br><span class="hljs-regexp">/etc/</span>screenrc<br><span class="hljs-regexp">/etc/</span>sensors3.conf<br><span class="hljs-regexp">/etc/</span>sysctl.conf<br><span class="hljs-regexp">/etc/</span>sudoers<br><span class="hljs-regexp">/etc/</span>shadow<br><span class="hljs-regexp">/etc/</span>skel<br><span class="hljs-regexp">/etc/</span>pam.d/su<br><span class="hljs-regexp">/etc/</span>pam.d/sshd<br><span class="hljs-regexp"><code class="language-hljs gradle">test@ubuntu-server:~$ sudo <span class="hljs-keyword">find</span> /etc -name s*<br><span class="hljs-regexp">/etc/</span>subuid<br><span class="hljs-regexp">/etc/</span>screenrc<br><span class="hljs-regexp">/etc/</span>sensors3.conf<br><span class="hljs-regexp">/etc/</span>sysctl.conf<br><span class="hljs-regexp">/etc/</span>sudoers<br><span class="hljs-regexp">/etc/</span>shadow<br><span class="hljs-regexp">/etc/</span>skel<br><span class="hljs-regexp">/etc/</span>pam.d/su<br><span class="hljs-regexp">/etc/</span>pam.d/sshd<br><span class="hljs-regexp">/etc/</span>pam.d/sudo<br>...<br></code></pre></td></tr></table></figure>
+
+<h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><p>接着我们来查看一些系统管理相关的命令，比如我们Windows中的任务管理器，我们可以使用<code>top</code>命令来打开：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre class=" language-hljs tap">top - 10:48:46 up  5:52, <span class="hljs-number"> 1 </span>user,  load average: 0.00, 0.00, 0.00<br>Tasks:<span class="hljs-number"> 191 </span>total,  <span class="hljs-number"> 2 </span>running,<span class="hljs-number"> 189 </span>sleeping,  <span class="hljs-number"> 0 </span>stopped,  <span class="hljs-number"> 0 </span>zombie<br>%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st<br>MiB Mem :   3919.1 total,   2704.2 free,    215.0 used,    999.9 buff/cache<br>MiB Swap:   3923.0 total,   3923.0 free,      0.0 used.   3521.4 avail Mem <br><br>    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                       <br> <span class="hljs-number"> 10528 </span>test     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 8944 </span> <span class="hljs-number"> 3072 </span> <span class="hljs-number"> 2652 </span>R   0.7   0.1   0:00.07 top                           <br>  <span class="hljs-number"> 9847 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.3   0.0   0:00.87 kworker/0:0-events            <br>     <span class="hljs-number"> 1 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span><span class="hljs-number"> 102760 </span><span class="hljs-number"> 10456 </span> <span class="hljs-number"> 7120 </span>S   0.0   0.3   0:02.02 systemd                       <br>     <span class="hljs-number"> 2 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.01 kthreadd                      <br>     <span class="hljs-number"> 3 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 rcu_gp                        <br>     <span class="hljs-number"> 4 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 rcu_par_gp                    <br>     <span class="hljs-number"> 6 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 kworker/0:0H-kblockd          <br>     <span class="hljs-number"> 8 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 mm_percpu_wq                  <br>     <span class="hljs-number"> 9 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.15 ksoftirqd/0                   <br>    <span class="hljs-number"> 10 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>R   0.0   0.0   0:01.49 rcu_sched                     <br>    <span class="hljs-number"> 11 </span>root      rt  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.24 migration/0                   <br>    <span class="hljs-number"> 12 </span>root     -51  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 idle_inject/0                 <br>    <span class="hljs-number"> 14 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 cpuhp/0                       <br>    <span class="hljs-number"> 15 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 cpuhp/1                       <br>    <span class="hljs-number"> 16 </span>root     -51  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 idle_inject/1                 <br>    <span class="hljs-number"> 17 </span>root      rt  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.30 migration/1                   <br>    <span class="hljs-number"> 18 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.07 ksoftirqd/1                   <br>    <span class="hljs-number"> 20 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"><code class="language-hljs tap">top - 10:48:46 up  5:52, <span class="hljs-number"> 1 </span>user,  load average: 0.00, 0.00, 0.00<br>Tasks:<span class="hljs-number"> 191 </span>total,  <span class="hljs-number"> 2 </span>running,<span class="hljs-number"> 189 </span>sleeping,  <span class="hljs-number"> 0 </span>stopped,  <span class="hljs-number"> 0 </span>zombie<br>%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st<br>MiB Mem :   3919.1 total,   2704.2 free,    215.0 used,    999.9 buff/cache<br>MiB Swap:   3923.0 total,   3923.0 free,      0.0 used.   3521.4 avail Mem <br><br>    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                       <br> <span class="hljs-number"> 10528 </span>test     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 8944 </span> <span class="hljs-number"> 3072 </span> <span class="hljs-number"> 2652 </span>R   0.7   0.1   0:00.07 top                           <br>  <span class="hljs-number"> 9847 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.3   0.0   0:00.87 kworker/0:0-events            <br>     <span class="hljs-number"> 1 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span><span class="hljs-number"> 102760 </span><span class="hljs-number"> 10456 </span> <span class="hljs-number"> 7120 </span>S   0.0   0.3   0:02.02 systemd                       <br>     <span class="hljs-number"> 2 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.01 kthreadd                      <br>     <span class="hljs-number"> 3 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 rcu_gp                        <br>     <span class="hljs-number"> 4 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 rcu_par_gp                    <br>     <span class="hljs-number"> 6 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 kworker/0:0H-kblockd          <br>     <span class="hljs-number"> 8 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 mm_percpu_wq                  <br>     <span class="hljs-number"> 9 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.15 ksoftirqd/0                   <br>    <span class="hljs-number"> 10 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>R   0.0   0.0   0:01.49 rcu_sched                     <br>    <span class="hljs-number"> 11 </span>root      rt  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.24 migration/0                   <br>    <span class="hljs-number"> 12 </span>root     -51  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 idle_inject/0                 <br>    <span class="hljs-number"> 14 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 cpuhp/0                       <br>    <span class="hljs-number"> 15 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 cpuhp/1                       <br>    <span class="hljs-number"> 16 </span>root     -51  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.00 idle_inject/1                 <br>    <span class="hljs-number"> 17 </span>root      rt  <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.30 migration/1                   <br>    <span class="hljs-number"> 18 </span>root     <span class="hljs-number"> 20 </span> <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>S   0.0   0.0   0:00.07 ksoftirqd/1                   <br>    <span class="hljs-number"> 20 </span>root      <span class="hljs-number"> 0 </span>-20      <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 0 </span>I   0.0   0.0   0:00.00 kworker/1:0H-kblockd  <br></code></pre></td></tr></table></figure>
+
+<p>可以很清楚地看到当前CPU的使用情况以及内存的占用情况。</p>
+<p>按下数字键1，可以展示所有CPU核心的使用情况：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs vim">%Cpu0  :  <span class="hljs-number">0.0</span> us,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">sy</span>,  <span class="hljs-number">0.0</span> ni,<span class="hljs-number">100.0</span> id,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">wa</span>,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">hi</span>,  <span class="hljs-number">0.0</span> si,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">st</span><br>%Cpu1  :  <span class="hljs-number">0.0</span> us,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">sy</span>,  <span class="hljs-number">0.0</span> ni,<span class="hljs-number">100.0</span> id,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">wa</span>,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">hi</span>,  <span class="hljs-number">0.0</span> si,  <span class="hljs-number">0.0</span> <span class="hljs-keyword"><code class="language-hljs vim">%Cpu0  :  <span class="hljs-number">0.0</span> us,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">sy</span>,  <span class="hljs-number">0.0</span> ni,<span class="hljs-number">100.0</span> id,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">wa</span>,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">hi</span>,  <span class="hljs-number">0.0</span> si,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">st</span><br>%Cpu1  :  <span class="hljs-number">0.0</span> us,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">sy</span>,  <span class="hljs-number">0.0</span> ni,<span class="hljs-number">100.0</span> id,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">wa</span>,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">hi</span>,  <span class="hljs-number">0.0</span> si,  <span class="hljs-number">0.0</span> <span class="hljs-keyword">st</span><br></code></pre></td></tr></table></figure>
+
+<p>按下f键可以设置以哪一列进行排序或是显示那些参数：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs vim">Fields Management <span class="hljs-keyword">for</span> window <span class="hljs-number">1</span>:Def, whose current <span class="hljs-keyword">sort</span> field <span class="hljs-keyword">is</span> %MEM<br>   Navigate with Up/Dn, Right selects <span class="hljs-keyword">for</span> <span class="hljs-keyword">move</span> then <span class="hljs-symbol">&lt;Enter&gt;</span> <span class="hljs-built_in">or</span> Left commits,<br>   <span class="hljs-string">&#x27;d&#x27;</span> <span class="hljs-built_in">or</span> <span class="hljs-symbol">&lt;Space&gt;</span> toggles <span class="hljs-keyword">display</span>, <span class="hljs-string">&#x27;s&#x27;</span> sets <span class="hljs-keyword">sort</span>.  Use <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-built_in">or</span> <span class="hljs-symbol">&lt;Esc&gt;</span> <span class="hljs-keyword"><code class="language-hljs vim">Fields Management <span class="hljs-keyword">for</span> window <span class="hljs-number">1</span>:Def, whose current <span class="hljs-keyword">sort</span> field <span class="hljs-keyword">is</span> %MEM<br>   Navigate with Up/Dn, Right selects <span class="hljs-keyword">for</span> <span class="hljs-keyword">move</span> then <span class="hljs-symbol">&lt;Enter&gt;</span> <span class="hljs-built_in">or</span> Left commits,<br>   <span class="hljs-string">&#x27;d&#x27;</span> <span class="hljs-built_in">or</span> <span class="hljs-symbol">&lt;Space&gt;</span> toggles <span class="hljs-keyword">display</span>, <span class="hljs-string">&#x27;s&#x27;</span> sets <span class="hljs-keyword">sort</span>.  Use <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-built_in">or</span> <span class="hljs-symbol">&lt;Esc&gt;</span> <span class="hljs-keyword">to</span> end!<br></code></pre></td></tr></table></figure>
+
+<p>按下q键即可退出监控界面。</p>
+<p>我们可以直接输入free命令来查看当前系统的内存使用情况：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ free -m<br>              <span class="hljs-attribute">total</span>        used        free      shared  buff/cache   available<br><span class="hljs-attribute">Mem</span>:           <span class="hljs-number">3919</span>         <span class="hljs-number">212</span>        <span class="hljs-number">2706</span>           <span class="hljs-number">1</span>         <span class="hljs-number">999</span>        <span class="hljs-number">3523</span><br><span class="hljs-attribute">Swap</span>:          <span class="hljs-number">3922</span>           <span class="hljs-number">0</span>        <span class="hljs-number"><code class="language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ free -m<br>              <span class="hljs-attribute">total</span>        used        free      shared  buff/cache   available<br><span class="hljs-attribute">Mem</span>:           <span class="hljs-number">3919</span>         <span class="hljs-number">212</span>        <span class="hljs-number">2706</span>           <span class="hljs-number">1</span>         <span class="hljs-number">999</span>        <span class="hljs-number">3523</span><br><span class="hljs-attribute">Swap</span>:          <span class="hljs-number">3922</span>           <span class="hljs-number">0</span>        <span class="hljs-number">3922</span><br></code></pre></td></tr></table></figure>
+
+<p>其中-m表示以M为单位，也可以-g表示以G为单位，默认是kb为单位。</p>
+<p>最后就是磁盘容量，我们可以使用<code>lsblk</code>来查看所有块设备的信息，其中就包括我们的硬盘、光驱等：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre class=" language-hljs tap">test@ubuntu-server:~$ lsblk<br>NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT<br>loop0                       7:0   <span class="hljs-number"> 0 </span>48.9M <span class="hljs-number"> 1 </span>loop /snap/core18/2127<br>loop1                       7:1   <span class="hljs-number"> 0 </span>28.1M <span class="hljs-number"> 1 </span>loop /snap/snapd/12707<br>loop2                       7:2   <span class="hljs-number"> 0 </span>  62M <span class="hljs-number"> 1 </span>loop /snap/lxd/21032<br>sr0                        11:0   <span class="hljs-number"> 1 </span>1024M <span class="hljs-number"> 0 </span>rom  <br>nvme0n1                   259:0   <span class="hljs-number"> 0 </span>  20G <span class="hljs-number"> 0 </span>disk <br>├─nvme0n1p1               259:1   <span class="hljs-number"> 0 </span> 512M <span class="hljs-number"> 0 </span>part /boot/efi<br>├─nvme0n1p2               259:2   <span class="hljs-number"> 0 </span>   1G <span class="hljs-number"> 0 </span>part /boot<br>└─nvme0n1p3               259:3   <span class="hljs-number"> 0 </span>18.5G <span class="hljs-number"> 0 </span>part <br>  └─ubuntu--vg-ubuntu--lv 253:0   <span class="hljs-number"> 0 </span>18.5G <span class="hljs-number"><code class="language-hljs tap">test@ubuntu-server:~$ lsblk<br>NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT<br>loop0                       7:0   <span class="hljs-number"> 0 </span>48.9M <span class="hljs-number"> 1 </span>loop /snap/core18/2127<br>loop1                       7:1   <span class="hljs-number"> 0 </span>28.1M <span class="hljs-number"> 1 </span>loop /snap/snapd/12707<br>loop2                       7:2   <span class="hljs-number"> 0 </span>  62M <span class="hljs-number"> 1 </span>loop /snap/lxd/21032<br>sr0                        11:0   <span class="hljs-number"> 1 </span>1024M <span class="hljs-number"> 0 </span>rom  <br>nvme0n1                   259:0   <span class="hljs-number"> 0 </span>  20G <span class="hljs-number"> 0 </span>disk <br>├─nvme0n1p1               259:1   <span class="hljs-number"> 0 </span> 512M <span class="hljs-number"> 0 </span>part /boot/efi<br>├─nvme0n1p2               259:2   <span class="hljs-number"> 0 </span>   1G <span class="hljs-number"> 0 </span>part /boot<br>└─nvme0n1p3               259:3   <span class="hljs-number"> 0 </span>18.5G <span class="hljs-number"> 0 </span>part <br>  └─ubuntu--vg-ubuntu--lv 253:0   <span class="hljs-number"> 0 </span>18.5G <span class="hljs-number"> 0 </span>lvm  /<br></code></pre></td></tr></table></figure>
+
+<p>可以看到nvme开头的就是我们的硬盘（这个因人而异，可能你们的是sda，磁盘类型不同名称就不同）可以看到<code>nvme0n1  </code>容量为20G，并且512M用作存放EFI文件，1G存放启动文件，剩余容量就是存放系统文件和我们的用户目录。</p>
+<p>这里要提到一个挂载的概念：</p>
+<blockquote>
+<p>挂载，指的就是将设备文件中的顶级目录连接到 Linux 根目录下的某一目录（最好是空目录），访问此目录就等同于访问设备文件。</p>
+</blockquote>
+<p>比如我们的主硬盘，挂载点就被设定为<code>/</code>根目录，而我们所有保存的文件都会存储在硬盘中，如果你有U盘（最好将U盘的文件格式改为ExFat，可以直接在Windows中进行格式化，然后随便放入一些文件即可）之类的东西，我们可以演示一下对U盘进行挂载：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo fdisk -l<br>...<br>Disk /dev/sda: 60 GiB, 64424509440 bytes, 125829120 sectors<br>Disk model: USB DISK        <br>Units: sectors of 1 * 512 = 512 bytes<br>Sector size (logical/physical): 512 bytes / 512 bytes<br>I/O size (minimum/optimal): 512 bytes / 512 bytes<br>Disklabel <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo fdisk -l<br>...<br>Disk /dev/sda: 60 GiB, 64424509440 bytes, 125829120 sectors<br>Disk model: USB DISK        <br>Units: sectors of 1 * 512 = 512 bytes<br>Sector size (logical/physical): 512 bytes / 512 bytes<br>I/O size (minimum/optimal): 512 bytes / 512 bytes<br>Disklabel <span class="hljs-built_in">type</span>: dos<br>Disk identifier: 0x4a416279<br><br>Device     Boot     Start       End   Sectors  Size Id Type<br>/dev/sda1  *       614400 125214719 124600320 59.4G  7 HPFS/NTFS/exFAT<br>/dev/sda2       125214720 125825022    610303  298M  6 FAT16<br></code></pre></td></tr></table></figure>
+
+<p>将U盘插入电脑，选择连接到Linux，输入<code>sudo fdisk -l</code>命令来查看硬盘实体情况，可以看到有一个USB DISK设备，注意观察一下是不是和自己的U盘容量一致，可以看到设备名称为<code>/dev/sda1</code>。</p>
+<p>接着我们设备挂载到一个目录下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir u-test<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo mount /dev/sda1 u-test/<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> u-test/<br><span class="hljs-built_in">test</span>@ubuntu-server:~/u-test$ ls<br> CGI<br> cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso<br> cn_windows_7_professional_x64_dvd_x15-65791.iso<br> cn_windows_8.1_enterprise_with_update_x64_dvd_6050374.iso<br> cn_windows_8.1_professional_vl_with_update_x64_dvd_4050293.iso<br> cn_windows_server_2019_updated_july_2020_x64_dvd_2c9b67da.iso<br><span class="hljs-string"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mkdir u-test<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo mount /dev/sda1 u-test/<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <span class="hljs-built_in">cd</span> u-test/<br><span class="hljs-built_in">test</span>@ubuntu-server:~/u-test$ ls<br> CGI<br> cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso<br> cn_windows_7_professional_x64_dvd_x15-65791.iso<br> cn_windows_8.1_enterprise_with_update_x64_dvd_6050374.iso<br> cn_windows_8.1_professional_vl_with_update_x64_dvd_4050293.iso<br> cn_windows_server_2019_updated_july_2020_x64_dvd_2c9b67da.iso<br><span class="hljs-string">&#x27;System Volume Information&#x27;</span><br> zh-cn_windows_10_consumer_editions_version_21h1_updated_sep_2021_x64_dvd_991b822f.iso<br> zh-cn_windows_11_consumer_editions_x64_dvd_904f13e4.iso<br></code></pre></td></tr></table></figure>
+
+<p>最后进入到此目录中，就能看到你U盘中的文件了，如果你不想使用U盘了，可以直接取消挂载：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre class=" language-hljs jboss-cli">test@ubuntu-server:~<span class="hljs-string">/u-test</span>$ <span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br>test@ubuntu-server:~$ sudo umount <span class="hljs-string"><code class="language-hljs jboss-cli">test@ubuntu-server:~<span class="hljs-string">/u-test</span>$ <span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br>test@ubuntu-server:~$ sudo umount <span class="hljs-string">/dev/sda1</span><br></code></pre></td></tr></table></figure>
+
+<p>最后我们可以通过<code>df</code>命令查看当前磁盘使用情况：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre class=" language-hljs tap">test@ubuntu-server:~$ df -m<br>Filesystem                        1M-blocks  Used Available Use% Mounted on<br>udev                                  <span class="hljs-number"> 1900 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1900 </span>  0% /dev<br>tmpfs                                  <span class="hljs-number"> 392 </span>   <span class="hljs-number"> 2 </span>     <span class="hljs-number"> 391 </span>  1% /run<br>/dev/mapper/ubuntu--vg-ubuntu--lv    <span class="hljs-number"> 18515 </span><span class="hljs-number"> 6544 </span>   <span class="hljs-number"> 11009 </span> 38% /<br>tmpfs                                 <span class="hljs-number"> 1960 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1960 </span>  0% /dev/shm<br>tmpfs                                    <span class="hljs-number"> 5 </span>   <span class="hljs-number"> 0 </span>       <span class="hljs-number"> 5 </span>  0% /run/lock<br>tmpfs                                 <span class="hljs-number"> 1960 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1960 </span>  0% /sys/fs/cgroup<br>/dev/nvme0n1p2                         <span class="hljs-number"> 976 </span> <span class="hljs-number"> 109 </span>     <span class="hljs-number"> 800 </span> 12% /boot<br>/dev/nvme0n1p1                         <span class="hljs-number"> 511 </span>   <span class="hljs-number"> 4 </span>     <span class="hljs-number"> 508 </span>  1% /boot/efi<br>/dev/loop0                              <span class="hljs-number"> 49 </span>  <span class="hljs-number"> 49 </span>       <span class="hljs-number"> 0 </span>100% /snap/core18/2127<br>/dev/loop1                              <span class="hljs-number"> 29 </span>  <span class="hljs-number"> 29 </span>       <span class="hljs-number"> 0 </span>100% /snap/snapd/12707<br>/dev/loop2                              <span class="hljs-number"> 62 </span>  <span class="hljs-number"> 62 </span>       <span class="hljs-number"> 0 </span>100% /snap/lxd/21032<br>tmpfs                                  <span class="hljs-number"> 392 </span>   <span class="hljs-number"> 0 </span>     <span class="hljs-number"><code class="language-hljs tap">test@ubuntu-server:~$ df -m<br>Filesystem                        1M-blocks  Used Available Use% Mounted on<br>udev                                  <span class="hljs-number"> 1900 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1900 </span>  0% /dev<br>tmpfs                                  <span class="hljs-number"> 392 </span>   <span class="hljs-number"> 2 </span>     <span class="hljs-number"> 391 </span>  1% /run<br>/dev/mapper/ubuntu--vg-ubuntu--lv    <span class="hljs-number"> 18515 </span><span class="hljs-number"> 6544 </span>   <span class="hljs-number"> 11009 </span> 38% /<br>tmpfs                                 <span class="hljs-number"> 1960 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1960 </span>  0% /dev/shm<br>tmpfs                                    <span class="hljs-number"> 5 </span>   <span class="hljs-number"> 0 </span>       <span class="hljs-number"> 5 </span>  0% /run/lock<br>tmpfs                                 <span class="hljs-number"> 1960 </span>   <span class="hljs-number"> 0 </span>    <span class="hljs-number"> 1960 </span>  0% /sys/fs/cgroup<br>/dev/nvme0n1p2                         <span class="hljs-number"> 976 </span> <span class="hljs-number"> 109 </span>     <span class="hljs-number"> 800 </span> 12% /boot<br>/dev/nvme0n1p1                         <span class="hljs-number"> 511 </span>   <span class="hljs-number"> 4 </span>     <span class="hljs-number"> 508 </span>  1% /boot/efi<br>/dev/loop0                              <span class="hljs-number"> 49 </span>  <span class="hljs-number"> 49 </span>       <span class="hljs-number"> 0 </span>100% /snap/core18/2127<br>/dev/loop1                              <span class="hljs-number"> 29 </span>  <span class="hljs-number"> 29 </span>       <span class="hljs-number"> 0 </span>100% /snap/snapd/12707<br>/dev/loop2                              <span class="hljs-number"> 62 </span>  <span class="hljs-number"> 62 </span>       <span class="hljs-number"> 0 </span>100% /snap/lxd/21032<br>tmpfs                                  <span class="hljs-number"> 392 </span>   <span class="hljs-number"> 0 </span>     <span class="hljs-number"> 392 </span>  0% /run/user/1000<br></code></pre></td></tr></table></figure>
+
+<p>输入<code>ps</code>可以查看当前运行的一些进程，其实和top有点类似，但是没有监控功能，只能显示当前的。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ ps<br>    <span class="hljs-attribute">PID</span> TTY          TIME CMD<br>  <span class="hljs-attribute">11438</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> bash<br>  <span class="hljs-attribute">11453</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number"><code class="language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ ps<br>    <span class="hljs-attribute">PID</span> TTY          TIME CMD<br>  <span class="hljs-attribute">11438</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> bash<br>  <span class="hljs-attribute">11453</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> ps<br></code></pre></td></tr></table></figure>
+
+<p>添加-ef查看所有的进程：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs tap">test@ubuntu-server:~$ ps -ef<br>UID          PID    PPID  C STIME TTY          TIME CMD<br>root          <span class="hljs-number"> 1 </span>     <span class="hljs-number"> 0 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:02 /sbin/init<br>root          <span class="hljs-number"> 2 </span>     <span class="hljs-number"> 0 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [kthreadd]<br>root          <span class="hljs-number"> 3 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [rcu_gp]<br>root          <span class="hljs-number"> 4 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [rcu_par_gp]<br>root          <span class="hljs-number"> 6 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"><code class="language-hljs tap">test@ubuntu-server:~$ ps -ef<br>UID          PID    PPID  C STIME TTY          TIME CMD<br>root          <span class="hljs-number"> 1 </span>     <span class="hljs-number"> 0 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:02 /sbin/init<br>root          <span class="hljs-number"> 2 </span>     <span class="hljs-number"> 0 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [kthreadd]<br>root          <span class="hljs-number"> 3 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [rcu_gp]<br>root          <span class="hljs-number"> 4 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [rcu_par_gp]<br>root          <span class="hljs-number"> 6 </span>     <span class="hljs-number"> 2 </span><span class="hljs-number"> 0 </span>04:55 ?        00:00:00 [kworker/0:0H-kblockd]<br>...<br></code></pre></td></tr></table></figure>
+
+<p>我们可以找到对应的进程ID（PID），使用kill命令将其强制终止：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ ps<br>    <span class="hljs-attribute">PID</span> TTY          TIME CMD<br>  <span class="hljs-attribute">11438</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> bash<br>  <span class="hljs-attribute">11455</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> ps<br><span class="hljs-attribute">test</span>@ubuntu-server:~$ kill -<span class="hljs-number">9</span> <span class="hljs-number">11438</span><br><span class="hljs-attribute">Connection</span> to <span class="hljs-number"><code class="language-hljs apache"><span class="hljs-attribute">test</span>@ubuntu-server:~$ ps<br>    <span class="hljs-attribute">PID</span> TTY          TIME CMD<br>  <span class="hljs-attribute">11438</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> bash<br>  <span class="hljs-attribute">11455</span> pts/<span class="hljs-number">0</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> ps<br><span class="hljs-attribute">test</span>@ubuntu-server:~$ kill -<span class="hljs-number">9</span> <span class="hljs-number">11438</span><br><span class="hljs-attribute">Connection</span> to <span class="hljs-number">192.168.10.6</span> closed.<br></code></pre></td></tr></table></figure>
+
+<p>比如我们可以将当前会话的bash给杀死，那么会导致我们的连接直接断开，其中-9是一个信号，表示杀死进程：</p>
+<ul>
+<li>1 (HUP)：重新加载进程。</li>
+<li>9 (KILL)：杀死一个进程。</li>
+<li>15 (TERM)：正常停止一个进程。</li>
+</ul>
+<p>最后如果我们想要正常关机，只需要输入shutdown即可，系统会创建一个关机计划，并在指定时间关机，或是添加now表示立即关机：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs autoit">test<span class="hljs-symbol">@ubuntu</span>-server:~$ sudo <span class="hljs-built_in">shutdown</span><br>[sudo] password <span class="hljs-keyword">for</span> test: <br><span class="hljs-built_in">Shutdown</span> scheduled <span class="hljs-keyword">for</span> Mon <span class="hljs-number">2022</span><span class="hljs-number">-01</span><span class="hljs-number">-24</span> <span class="hljs-number">11</span>:<span class="hljs-number">46</span>:<span class="hljs-number">18</span> UTC, use <span class="hljs-string">&#x27;shutdown -c&#x27;</span> <span class="hljs-keyword">to</span> cancel.<br>test<span class="hljs-symbol">@ubuntu</span>-server:~$ sudo <span class="hljs-built_in">shutdown</span> now<br>Connection <span class="hljs-keyword">to</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.6</span> closed by remote host.<br>Connection <span class="hljs-keyword">to</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number"><code class="language-hljs autoit">test<span class="hljs-symbol">@ubuntu</span>-server:~$ sudo <span class="hljs-built_in">shutdown</span><br>[sudo] password <span class="hljs-keyword">for</span> test: <br><span class="hljs-built_in">Shutdown</span> scheduled <span class="hljs-keyword">for</span> Mon <span class="hljs-number">2022</span><span class="hljs-number">-01</span><span class="hljs-number">-24</span> <span class="hljs-number">11</span>:<span class="hljs-number">46</span>:<span class="hljs-number">18</span> UTC, use <span class="hljs-string">&#x27;shutdown -c&#x27;</span> <span class="hljs-keyword">to</span> cancel.<br>test<span class="hljs-symbol">@ubuntu</span>-server:~$ sudo <span class="hljs-built_in">shutdown</span> now<br>Connection <span class="hljs-keyword">to</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.6</span> closed by remote host.<br>Connection <span class="hljs-keyword">to</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.6</span> closed.<br></code></pre></td></tr></table></figure>
+
+<h3 id="压缩解压"><a href="#压缩解压" class="headerlink" title="压缩解压"></a>压缩解压</h3><p>比较常用的压缩和解压也是重点，我们在Windows中经常需要下载一些压缩包，并且将压缩包解压才能获得里面的文件，而Linux中也支持文件的压缩和解压。</p>
+<p>这里我们使用<code>tar</code>命令来完成文件亚索和解压操作，在Linux中比较常用的是gzip格式，后缀名一般为.gz，tar命令的参数-c表示对文件进行压缩，创建新的压缩文件，-x表示进行解压操作，-z表示以gzip格式进行操作，-v可以在处理过程中输出一些日志信息，-f表示对普通文件进行操作，这里我们创建三个文件并对这三个文件进行打包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zcvf test.tar.gz *.txt<br>1.txt<br>2.txt<br>3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>1.txt  2.txt  3.txt  test.tar.gz<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zcvf test.tar.gz *.txt<br>1.txt<br>2.txt<br>3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>1.txt  2.txt  3.txt  test.tar.gz<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ <br></code></pre></td></tr></table></figure>
+
+<p>接着我们删除刚刚三个文件，再执行解压操作，得到压缩包中文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm *.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>test.tar.gz<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zxvf test.tar.gz <br>1.txt<br>2.txt<br>3.txt<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm *.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>test.tar.gz<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zxvf test.tar.gz <br>1.txt<br>2.txt<br>3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>1.txt  2.txt  3.txt  test.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>同样的，我们也可以对一个文件夹进行打包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv *.txt <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zcvf test.tar.gz <span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/1.txt<br><span class="hljs-built_in">test</span>/2.txt<br><span class="hljs-built_in">test</span>/3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm -r <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>test.tar.gz <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zxvf test.tar.gz <br><span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/1.txt<br><span class="hljs-built_in">test</span>/2.txt<br><span class="hljs-built_in">test</span>/3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br><span class="hljs-built_in">test</span>  test.tar.gz<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls <span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ mv *.txt <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zcvf test.tar.gz <span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/1.txt<br><span class="hljs-built_in">test</span>/2.txt<br><span class="hljs-built_in">test</span>/3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ rm -r <span class="hljs-built_in">test</span><br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br>test.tar.gz <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ tar -zxvf test.tar.gz <br><span class="hljs-built_in">test</span>/<br><span class="hljs-built_in">test</span>/1.txt<br><span class="hljs-built_in">test</span>/2.txt<br><span class="hljs-built_in">test</span>/3.txt<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls<br><span class="hljs-built_in">test</span>  test.tar.gz<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ls <span class="hljs-built_in">test</span><br>1.txt  2.txt  3.txt<br></code></pre></td></tr></table></figure>
+
+<p>到此，Linux的一些基本命令就讲解为止。</p>
+<hr>
+<h2 id="vim文本编辑器"><a href="#vim文本编辑器" class="headerlink" title="vim文本编辑器"></a>vim文本编辑器</h2><p>和Windows中的记事本一样，Linux中也有文本编辑器，叫做Vi编辑器，Ubuntu中内置了Vi编辑器的升级版Vim，我们这里就讲解Vim编辑器的使用。</p>
+<p>我们可以直接输入<code>vim 文件名称</code>来使用Vim编辑器对文本文件进行编辑：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ vim hello.txt<br></code></pre></td></tr></table></figure>
+
+<p>进入编辑器之后，我们发现界面变成了：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre class=" language-hljs haml"><code class="language-hljs haml">~                                                                                                                                                                                         <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>"hello.txt" [New File]                                                            0,0-1         All<br></code></pre></td></tr></table></figure>
+
+<p>这时我们直接输入内容是无法完成的，因为默认进入之后为<code>命令模式</code>，Vim编辑器默认有三种模式：</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/180914/1-1P9141F35R32.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>命令模式：此模式下可以输入任意的命令进行操作，所有的输入都被看做是命令输入，而不是文本编辑输入。</li>
+<li>编辑模式：此模式下输入的任何内容都会以文本编辑方式写入到文件中，就像我们直接在Windows的记事本中写内容一样。</li>
+<li>末行模式：此模式下用于输入一些复杂命令，会在最后一行进行复杂命令的输入。</li>
+</ul>
+<p>在命令模式下，我们可以直接按下键盘上的<code>i</code>，此命令表示进行插入操作，会自动切换到编辑模式，这时可以看到最下方变为：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre class=" language-hljs haml">~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>-<span class="ruby">- INSERT --                                                                      <span class="hljs-number">1</span>,<span class="hljs-number"><code class="language-hljs haml">~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>~                                                                                                   <br>-<span class="ruby">- INSERT --                                                                      <span class="hljs-number">1</span>,<span class="hljs-number">1</span>           All</span><br></code></pre></td></tr></table></figure>
+
+<p>而这时我们所有的输入内容都可以直接写到文件中了，如果我们想回到命令模式，按下<code>Esc</code>键即可。</p>
+<p>除了<code>i</code>以外，我们也可以按下<code>a</code>表示从当前光标所在位置之后继续写，与<code>i</code>不同的是，<code>i</code>会在光标之前继续写，<code>o</code>会直接跳到下一行，而<code>A</code>表示在当前行的最后继续写入，<code>I</code>表示在当前行的最前面继续写入。</p>
+<p>这里我们随便粘贴一段文本信息进去（不要用Ctrl+V，Linux中没这操作，XShell右键点粘贴）：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs applescript">I was hard <span class="hljs-keyword">on</span> people sometimes, probably harder than I needed <span class="hljs-keyword">to</span> be. <br>I remember <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span> when Reed was six years old, coming home, <span class="hljs-keyword">and</span> I had just fired somebody <span class="hljs-keyword">that</span> <span class="hljs-built_in">day</span>.<br>And I imagined what <span class="hljs-keyword">it</span> was like <span class="hljs-keyword">for</span> <span class="hljs-keyword">that</span> person <span class="hljs-keyword">to</span> <span class="hljs-keyword">tell</span> his family <span class="hljs-keyword">and</span> his young son <span class="hljs-keyword">that</span> he had lost his job. <br>It was hard. <br>But　somebody’s got <span class="hljs-keyword">to</span> do <span class="hljs-keyword">it</span>. <br>I figured <span class="hljs-keyword">that</span> <span class="hljs-keyword">it</span> was always <span class="hljs-keyword">my</span> job <span class="hljs-keyword">to</span> make sure <span class="hljs-keyword">that</span> <span class="hljs-keyword">the</span> team was excellent, <span class="hljs-keyword">and</span> <span class="hljs-keyword">if</span> I didn’t do <span class="hljs-keyword">it</span>, nobody was going <span class="hljs-keyword">to</span> do <span class="hljs-keyword">it</span>.<br>You always have <span class="hljs-keyword">to</span> keep pushing <span class="hljs-keyword">to</span> innovate.<br>Dylan could have sung protest songs forever <span class="hljs-keyword">and</span> probably made a lot <span class="hljs-keyword">of</span> money, <span class="hljs-keyword">but</span> he didn’t. <br>He had <span class="hljs-keyword">to</span> move <span class="hljs-keyword">on</span>, <span class="hljs-keyword">and</span> when he did, <span class="hljs-keyword">by</span> going electric <span class="hljs-keyword">in</span> <span class="hljs-number">1965</span>, he alienated a lot <span class="hljs-keyword"><code class="language-hljs applescript">I was hard <span class="hljs-keyword">on</span> people sometimes, probably harder than I needed <span class="hljs-keyword">to</span> be. <br>I remember <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span> when Reed was six years old, coming home, <span class="hljs-keyword">and</span> I had just fired somebody <span class="hljs-keyword">that</span> <span class="hljs-built_in">day</span>.<br>And I imagined what <span class="hljs-keyword">it</span> was like <span class="hljs-keyword">for</span> <span class="hljs-keyword">that</span> person <span class="hljs-keyword">to</span> <span class="hljs-keyword">tell</span> his family <span class="hljs-keyword">and</span> his young son <span class="hljs-keyword">that</span> he had lost his job. <br>It was hard. <br>But　somebody’s got <span class="hljs-keyword">to</span> do <span class="hljs-keyword">it</span>. <br>I figured <span class="hljs-keyword">that</span> <span class="hljs-keyword">it</span> was always <span class="hljs-keyword">my</span> job <span class="hljs-keyword">to</span> make sure <span class="hljs-keyword">that</span> <span class="hljs-keyword">the</span> team was excellent, <span class="hljs-keyword">and</span> <span class="hljs-keyword">if</span> I didn’t do <span class="hljs-keyword">it</span>, nobody was going <span class="hljs-keyword">to</span> do <span class="hljs-keyword">it</span>.<br>You always have <span class="hljs-keyword">to</span> keep pushing <span class="hljs-keyword">to</span> innovate.<br>Dylan could have sung protest songs forever <span class="hljs-keyword">and</span> probably made a lot <span class="hljs-keyword">of</span> money, <span class="hljs-keyword">but</span> he didn’t. <br>He had <span class="hljs-keyword">to</span> move <span class="hljs-keyword">on</span>, <span class="hljs-keyword">and</span> when he did, <span class="hljs-keyword">by</span> going electric <span class="hljs-keyword">in</span> <span class="hljs-number">1965</span>, he alienated a lot <span class="hljs-keyword">of</span> people.<br></code></pre></td></tr></table></figure>
+
+<p>在我们编辑完成之后，需要进入到末行模式进行文件的保存并退出，按下<code>:</code>进入末行模式，再输入wq即可保存退出。</p>
+<p>接着我们来看一些比较常用的命令，首先是命令模式下的光标移动命令：</p>
+<ul>
+<li>^   直接调到本行最前面</li>
+<li>$   直接跳到本行最后面</li>
+<li>gg  直接跳到第一行</li>
+<li>[N]G    跳转到第N行</li>
+<li>[N]方向键    向一个方向跳转N个字符</li>
+</ul>
+<p>在末行模式下，常用的复杂命令有：</p>
+<ul>
+<li>:set number    开启行号</li>
+<li>:w    保存</li>
+<li>:wq或:x    保存并关闭</li>
+<li>:q    关闭</li>
+<li>:q!    强制关闭</li>
+</ul>
+<p>我们可以输入<code>/</code>或是<code>?</code>在末行模式中使用搜索功能，比如我们要搜索单词<code>it</code>：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs applescript">/<span class="hljs-keyword"><code class="language-hljs applescript">/<span class="hljs-keyword">it</span>  <br></code></pre></td></tr></table></figure>
+
+<p>接着会在文本中出现高亮，按<code>n</code>跳转到下一个搜索结果，?是从后向前搜索，/是从前向后搜索。</p>
+<p>它还支持替换功能，但是使用起来稍微比较复杂，语法如下：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs awk">:[addr]s<span class="hljs-regexp"><code class="language-hljs awk">:[addr]s<span class="hljs-regexp">/源字符串/</span>目的字符串/[option]<br></code></pre></td></tr></table></figure>
+
+<p>addr表示第几行或是一个范围，option表示操作类型：</p>
+<ul>
+<li>g: globe,表示全局替换</li>
+<li>c: confirm,表示进行确认</li>
+<li>p: 表示替代结果逐行显示(Ctrl + L恢复屏幕)</li>
+<li>i:  ignore,不区分大小写</li>
+</ul>
+<p>比如我们要将当前行中的<code>it</code>全部替换为<code>he</code>，那么可以这样写：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs elixir"><span class="hljs-symbol"><code class="language-hljs elixir"><span class="hljs-symbol">:s/it/he/g</span><br></code></pre></td></tr></table></figure>
+
+<p>实际上除了以上三种模式外，还有一种模式叫做可视化模式，按下键盘上的<code>v</code>即可进入，它能够支持选取一段文本，选取后，我们可以对指定段落的文本内容快速进行复制、剪切、删除、插入等操作，非常方便。在此模式下，我们可以通过上下左右键进行选取，以进入可视化模式时的位置作为基本位置，通过移动另一端来进行选取。</p>
+<p>我们可以使用以下命令来对选中区域进行各种操作：</p>
+<ul>
+<li>y   复制选中区域</li>
+<li>d/x   剪切（删除）选中区域</li>
+<li>p  粘贴</li>
+<li>u  撤销上一步</li>
+</ul>
+<p>当然，这些命令在命令模式下也可以使用，但是可视化模式下使用更适合一些。</p>
+<hr>
+<h2 id="环境安装和项目部署"><a href="#环境安装和项目部署" class="headerlink" title="环境安装和项目部署"></a>环境安装和项目部署</h2><p>在学习完了Linux操作系统的一些基本操作之后，我们接着来看如何进行项目的环境安装和部署，包括安装JDK、Nginx服务器，以及上传我们的SpringBoot项目并运行。</p>
+<p>我们可以直接使用apt进行软件的安装，它是一个高级的安装包管理工具，我们可以直接寻找对应的软件进行安装，无需再去官网进行下载，非常方便，软件仓库中默认已经帮助我们存放了大量实用软件的安装包，只需要一个安装命令就可以进行安装了。</p>
+<p>实际上Ubuntu系统已经为我们自带了一些环境了，比如Python3：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre class=" language-hljs awk">test@ubuntu-server:~$ python3<br>Python <span class="hljs-number">3.8</span>.<span class="hljs-number">10</span> (default, Nov <span class="hljs-number">26</span> <span class="hljs-number">2021</span>, <span class="hljs-number">20</span>:<span class="hljs-number">14</span>:<span class="hljs-number">08</span>) <br>[GCC <span class="hljs-number">9.3</span>.<span class="hljs-number">0</span>] on linux<br>Type <span class="hljs-string">&quot;help&quot;</span>, <span class="hljs-string">&quot;copyright&quot;</span>, <span class="hljs-string">&quot;credits&quot;</span> or <span class="hljs-string">&quot;license&quot;</span> <span class="hljs-keyword">for</span> more information.<br>&gt;&gt;&gt; print(<span class="hljs-string">&quot;HelloWorld！&quot;</span>)<br>HelloWorld！<br>&gt;&gt;&gt; <span class="hljs-keyword"><code class="language-hljs awk">test@ubuntu-server:~$ python3<br>Python <span class="hljs-number">3.8</span>.<span class="hljs-number">10</span> (default, Nov <span class="hljs-number">26</span> <span class="hljs-number">2021</span>, <span class="hljs-number">20</span>:<span class="hljs-number">14</span>:<span class="hljs-number">08</span>) <br>[GCC <span class="hljs-number">9.3</span>.<span class="hljs-number">0</span>] on linux<br>Type <span class="hljs-string">&quot;help&quot;</span>, <span class="hljs-string">&quot;copyright&quot;</span>, <span class="hljs-string">&quot;credits&quot;</span> or <span class="hljs-string">&quot;license&quot;</span> <span class="hljs-keyword">for</span> more information.<br>&gt;&gt;&gt; print(<span class="hljs-string">&quot;HelloWorld！&quot;</span>)<br>HelloWorld！<br>&gt;&gt;&gt; <span class="hljs-keyword">exit</span>()<br></code></pre></td></tr></table></figure>
+
+<p>C语言的编译工具GCC可以通过APT进行安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><code class="language-hljs sh">sudo apt install gcc<br></code></pre></td></tr></table></figure>
+
+<p>安装后，可以编写一个简单的C语言程序并且编译为可执行文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string"><code class="language-hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);<br>&#125;  <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ vim hello.c<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ gcc hello.c -o hello<br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ vim hello.c<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ gcc hello.c -o hello<br><span class="hljs-built_in">test</span>@ubuntu-server:~$ ./hello <br>Hello World!<br></code></pre></td></tr></table></figure>
+
+<p>而JDK实际上安装也非常简单，通过APT即可：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo apt install openjdk-8-j<br>openjdk-8-jdk           openjdk-8-jre           openjdk-8-jre-zero      <br>openjdk-8-jdk-headless  openjdk-8-jre-headless  <br><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo apt install openjdk-8-j<br>openjdk-8-jdk           openjdk-8-jre           openjdk-8-jre-zero      <br>openjdk-8-jdk-headless  openjdk-8-jre-headless  <br><span class="hljs-built_in">test</span>@ubuntu-server:~$ sudo apt install openjdk-8-jdk<br></code></pre></td></tr></table></figure>
+
+<p>接着我们来测试一下编译和运行，首先编写一个Java程序：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs elixir">test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable"><code class="language-hljs elixir">test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>vim Main.java<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span>&#123;</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span></span>&#123;<br>                System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string"><code class="language-hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span>&#123;</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span></span>&#123;<br>                System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Hello World！"</span>);<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs ruby">test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>javac Main.java <br>test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>ls<br>Main.<span class="hljs-keyword">class</span>  Main.java<br>test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable"><code class="language-hljs ruby">test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>javac Main.java <br>test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>ls<br>Main.<span class="hljs-keyword">class</span>  Main.java<br>test<span class="hljs-variable">@ubuntu</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>java Main <br>Hello World！<br></code></pre></td></tr></table></figure>
+
+<p>接着我们来部署一下Redis服务器：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs cmake"><span class="hljs-keyword">test</span>@ubuntu-server:~$ sudo apt <span class="hljs-keyword"><code class="language-hljs cmake"><span class="hljs-keyword">test</span>@ubuntu-server:~$ sudo apt <span class="hljs-keyword">install</span> redis<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，可以直接使用<code>redis-cli</code>命令打开Redis客户端连接本地的服务器：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre class=" language-hljs accesslog">test@ubuntu-server:~$ redis-cli<br><span class="hljs-number"><code class="language-hljs accesslog">test@ubuntu-server:~$ redis-cli<br><span class="hljs-number">127.0.0.1:6379</span>> keys *<br>(empty list or set)<br></code></pre></td></tr></table></figure>
+
+<p>使用和之前Windows下没有区别。</p>
+<p>接着我们安装一下MySQL服务器，同样的，直接使用apt即可：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs apache"><span class="hljs-attribute">sudo</span> apt install mysql-server-<span class="hljs-number">8</span>.<span class="hljs-number"><code class="language-hljs apache"><span class="hljs-attribute">sudo</span> apt install mysql-server-<span class="hljs-number">8</span>.<span class="hljs-number">0</span> <br></code></pre></td></tr></table></figure>
+
+<p>我们直接直接登录MySQL服务器，注意要在root权限下使用，这样就不用输入密码了：</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre class=" language-hljs smali">sudo mysql -u root -p<br>Enter password: <br>Welcome to the MySQ<span class="hljs-class">L monitor.  Commands end with ;</span><span class="hljs-built_in"> or </span>\g.<br>Your MySQL connection id is 11<br>Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)<br><br>Copyright (c) 2000, 2021, Oracle<span class="hljs-built_in"> and/or </span>its affiliates.<br><br>Oracle is a registered trademark of Oracle Corporation<span class="hljs-built_in"> and/or </span>its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27;<span class="hljs-built_in"><code class="language-hljs smali">sudo mysql -u root -p<br>Enter password: <br>Welcome to the MySQ<span class="hljs-class">L monitor.  Commands end with ;</span><span class="hljs-built_in"> or </span>\g.<br>Your MySQL connection id is 11<br>Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)<br><br>Copyright (c) 2000, 2021, Oracle<span class="hljs-built_in"> and/or </span>its affiliates.<br><br>Oracle is a registered trademark of Oracle Corporation<span class="hljs-built_in"> and/or </span>its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27;<span class="hljs-built_in"> or </span>&#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.<br><br>mysql> exit<br></code></pre></td></tr></table></figure>
+
+<p>可以发现实际上就是我们之前在Windows的CMD中使用的样子，接着我们就创建一个生产环境下使用的数据库：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre class=" language-hljs gherkin">mysql&gt; create database book_manage;<br>mysql&gt; show databases;<br>+--------------------+<br>|<span class="hljs-string"> Database           </span>|<br>+--------------------+<br>|<span class="hljs-string"> book_manage        </span>|<br>|<span class="hljs-string"> information_schema </span>|<br>|<span class="hljs-string"> mysql              </span>|<br>|<span class="hljs-string"> performance_schema </span>|<br>|<span class="hljs-string"><code class="language-hljs gherkin">mysql&gt; create database book_manage;<br>mysql&gt; show databases;<br>+--------------------+<br>|<span class="hljs-string"> Database           </span>|<br>+--------------------+<br>|<span class="hljs-string"> book_manage        </span>|<br>|<span class="hljs-string"> information_schema </span>|<br>|<span class="hljs-string"> mysql              </span>|<br>|<span class="hljs-string"> performance_schema </span>|<br>|<span class="hljs-string"> sys                </span>|<br>+--------------------+<br>5 rows in set (0.01 sec)<br></code></pre></td></tr></table></figure>
+
+<p>接着我们创建一个用户来使用这个数据，一会我们就可以将SpringBoot配置文件进行修改并直接放到此服务器上进行部署。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre class=" language-hljs pgsql">mysql&gt; <span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> test identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.01</span> sec)<br><br>mysql&gt; <span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">on</span> book_manage.* <span class="hljs-keyword">to</span> test;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number"><code class="language-hljs pgsql">mysql&gt; <span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> test identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.01</span> sec)<br><br>mysql&gt; <span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">on</span> book_manage.* <span class="hljs-keyword">to</span> test;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
+
+<p>如果觉得这样很麻烦不是可视化的，可以使用Navicat连接进行操作，注意开启一下MySQL的外网访问。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre class=" language-hljs smali">test@ubuntu-server:~$ mysql -u test -p<br>Enter password: <br>Welcome to the MySQ<span class="hljs-class">L monitor.  Commands end with ;</span><span class="hljs-built_in"> or </span>\g.<br>Your MySQL connection id is 13<br>Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)<br><br>Copyright (c) 2000, 2021, Oracle<span class="hljs-built_in"> and/or </span>its affiliates.<br><br>Oracle is a registered trademark of Oracle Corporation<span class="hljs-built_in"> and/or </span>its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27;<span class="hljs-built_in"><code class="language-hljs smali">test@ubuntu-server:~$ mysql -u test -p<br>Enter password: <br>Welcome to the MySQ<span class="hljs-class">L monitor.  Commands end with ;</span><span class="hljs-built_in"> or </span>\g.<br>Your MySQL connection id is 13<br>Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)<br><br>Copyright (c) 2000, 2021, Oracle<span class="hljs-built_in"> and/or </span>its affiliates.<br><br>Oracle is a registered trademark of Oracle Corporation<span class="hljs-built_in"> and/or </span>its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27;<span class="hljs-built_in"> or </span>&#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.<br><br>mysql> show databases;<br>+--------------------+<br>| Database           |<br>+--------------------+<br>| book_manage        |<br>| information_schema |<br>+--------------------+<br>2 rows in set (0.01 sec)<br></code></pre></td></tr></table></figure>
+
+<p>使用test用户登录之后，查看数据库列表，有book_manage就OK了。</p>
+<p>最后我们修改一下SpringBoot项目的生产环境配置即可：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre class=" language-hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">mail:</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-string">smtp.163.com</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">javastudy111@163.com</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">TKPGLAPDSWKGJOWK</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://localhost:3306/book_manage</span><br>    <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">test</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-number">123456</span><br>  <span class="hljs-attr">jpa:</span><br>    <span class="hljs-attr">show-sql:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">hibernate:</span><br>      <span class="hljs-attr">ddl-auto:</span> <span class="hljs-string">update</span><br><span class="hljs-attr">springfox:</span><br>  <span class="hljs-attr">documentation:</span><br>    <span class="hljs-attr">enabled:</span> <span class="hljs-literal"><code class="language-hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">mail:</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-string">smtp.163.com</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">javastudy111@163.com</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">TKPGLAPDSWKGJOWK</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://localhost:3306/book_manage</span><br>    <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">test</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-number">123456</span><br>  <span class="hljs-attr">jpa:</span><br>    <span class="hljs-attr">show-sql:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">hibernate:</span><br>      <span class="hljs-attr">ddl-auto:</span> <span class="hljs-string">update</span><br><span class="hljs-attr">springfox:</span><br>  <span class="hljs-attr">documentation:</span><br>    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<p>然后启动我们的项目：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs sh"><span class="hljs-built_in"><code class="language-hljs sh"><span class="hljs-built_in">test</span>@ubuntu-server:~$ java -jar springboot-project-0.0.1-SNAPSHOT.jar <br></code></pre></td></tr></table></figure>
+
+<p>现在我们将前端页面的API访问地址修改为我们的SpringBoot服务器地址，即可正常使用了。</p>
+<p>我们也可以将我们的静态资源使用Nginx服务器进行代理：</p>
+<blockquote>
+<p>Nginx(“engine x”)是一款是由俄罗斯的程序设计师Igor Sysoev所开发高性能的 Web和 反向代理 服务器，也是一个 IMAP/POP3/SMTP 代理服务器。 在高连接并发的情况下，Nginx是Apache服务器不错的替代品。</p>
+</blockquote>
+<p>Nginx非常强大，它能够通提供非常方便的反向代理服务，并且支持负载均衡，不过我们这里用一下反向代理就可以了，实际上就是代理我们的前端页面，然后我们访问Nginx服务器即可访问到静态资源，这样我们前后端都放在了服务器上（你也可以搞两台服务器，一台挂静态资源一台挂SpringBoot服务器，实现真正意义上的分离，有条件的还能上个域名和证书啥的）。</p>
+<p>安装如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre class=" language-hljs cmake"><span class="hljs-keyword">test</span>@ubuntu-server:~$ sudo apt <span class="hljs-keyword"><code class="language-hljs cmake"><span class="hljs-keyword">test</span>@ubuntu-server:~$ sudo apt <span class="hljs-keyword">install</span> nginx<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，我们可以直接访问：<a target="_blank" rel="noopener" href="http://192.168.10.4/%EF%BC%8C%E8%83%BD%E5%A4%9F%E5%87%BA%E7%8E%B0Nginx%E9%A1%B5%E9%9D%A2%E8%A1%A8%E7%A4%BA%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%EF%BC%81">http://192.168.10.4/，能够出现Nginx页面表示安装成功！</a></p>
+<p>接着我们将静态资源上传到Linux服务器中，然后对Nginx进行反向代理配置：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre class=" language-hljs stata"><span class="hljs-keyword">test</span>@ubuntu-server:~$ <span class="hljs-keyword">cd</span> /etc/nginx/<br><span class="hljs-keyword">test</span>@ubuntu-server:/etc/nginx$ <span class="hljs-keyword">ls</span><br><span class="hljs-keyword">conf</span>.<span class="hljs-keyword">d</span>		koi-utf     modules-available  proxy_params	sites-enabled  <span class="hljs-keyword">win</span>-utf<br>fastcgi.<span class="hljs-keyword">conf</span>	koi-<span class="hljs-keyword">win</span>     modules-enabled    scgi_params	snippets<br>fastcgi_params	mime.types  nginx.<span class="hljs-keyword">conf</span>	       sites-available	uwsgi_params<br><span class="hljs-keyword">test</span>@ubuntu-server:/etc/nginx$ sudo vim nginx.<span class="hljs-keyword"><code class="language-hljs stata"><span class="hljs-keyword">test</span>@ubuntu-server:~$ <span class="hljs-keyword">cd</span> /etc/nginx/<br><span class="hljs-keyword">test</span>@ubuntu-server:/etc/nginx$ <span class="hljs-keyword">ls</span><br><span class="hljs-keyword">conf</span>.<span class="hljs-keyword">d</span>		koi-utf     modules-available  proxy_params	sites-enabled  <span class="hljs-keyword">win</span>-utf<br>fastcgi.<span class="hljs-keyword">conf</span>	koi-<span class="hljs-keyword">win</span>     modules-enabled    scgi_params	snippets<br>fastcgi_params	mime.types  nginx.<span class="hljs-keyword">conf</span>	       sites-available	uwsgi_params<br><span class="hljs-keyword">test</span>@ubuntu-server:/etc/nginx$ sudo vim nginx.<span class="hljs-keyword">conf</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre class=" language-hljs nginx"><span class="hljs-section">server</span> &#123;<br>                <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>                <span class="hljs-attribute">server_name</span>  <span class="hljs-number">192.168.10.4</span>;<br>                <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin *;<br>                <span class="hljs-attribute">location</span> / &#123;<br>                        <span class="hljs-attribute">root</span> /home/test/static;<br>                        <span class="hljs-attribute">charset</span> utf-<span class="hljs-number">8</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Credentials&#x27;</span> <span class="hljs-string">&#x27;true&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string"><code class="language-hljs nginx"><span class="hljs-section">server</span> &#123;<br>                <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>                <span class="hljs-attribute">server_name</span>  <span class="hljs-number">192.168.10.4</span>;<br>                <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin *;<br>                <span class="hljs-attribute">location</span> / &#123;<br>                        <span class="hljs-attribute">root</span> /home/test/static;<br>                        <span class="hljs-attribute">charset</span> utf-<span class="hljs-number">8</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Credentials&#x27;</span> <span class="hljs-string">&#x27;true&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;<br>                        <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string">&#x27;Content-Type,*&#x27;</span>;<br>                &#125;<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后就可以直接访问到我们的前端页面了，这时再开启SpringBoot服务器即可，可以在最后添加&amp;符号表示后台启动。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/13/3.html/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/13/1.html/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
